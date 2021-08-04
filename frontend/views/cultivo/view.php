@@ -54,7 +54,12 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
 ?>
     </div>
+
+    <?= yii\jui\DatePicker::widget(['name' => 'attributeName']) ?>
+
+    <?= yii\jui\DatePicker::widget(['name' => 'attributeName']) ?>
 <?php
+
 chdir ('C:\xampp\htdocs\climaapp\frontend\views\site');
 $output = shell_exec('python clima_intercepto.py');
 $intersecto=(float)trim($output);
