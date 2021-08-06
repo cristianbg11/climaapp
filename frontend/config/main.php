@@ -12,7 +12,11 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'modules' => [
-        'gridview' => ['class' => 'kartik\grid\Module']
+        'gridview' => ['class' => 'kartik\grid\Module'],
+        'datecontrol' => [
+            'class' => '\kartik\datecontrol\Module',
+            // see settings on http://demos.krajee.com/datecontrol#module
+        ]
     ],
     'components' => [
         'request' => [

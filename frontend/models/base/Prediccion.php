@@ -14,6 +14,7 @@ use Yii;
  * @property double $calculo_estimado
  * @property integer $id_cultivo
  *
+ * @property \frontend\models\DetPrediccion[] $detPrediccions
  * @property \frontend\models\Variable $variable
  * @property \frontend\models\Cultivo $cultivo
  */
@@ -29,6 +30,7 @@ class Prediccion extends \yii\db\ActiveRecord
     public function relationNames()
     {
         return [
+            'detPrediccions',
             'variable',
             'cultivo'
         ];
@@ -69,6 +71,14 @@ class Prediccion extends \yii\db\ActiveRecord
         ];
     }
     
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDetPrediccions()
+    {
+        return $this->hasMany(\frontend\models\DetPrediccion::className(), ['id_prediccion' => 'id']);
+    }
+        
     /**
      * @return \yii\db\ActiveQuery
      */

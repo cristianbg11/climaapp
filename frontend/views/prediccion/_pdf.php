@@ -8,7 +8,7 @@ use kartik\grid\GridView;
 /* @var $model frontend\models\Prediccion */
 
 $this->title = $model->fecha;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Prediccions'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Prediccion'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="prediccion-view">
@@ -39,6 +39,29 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => $gridColumn
     ]); 
+?>
+    </div>
+    
+    <div class="row">
+<?php
+if($providerDetPrediccion->totalCount){
+    $gridColumnDetPrediccion = [
+        ['class' => 'yii\grid\SerialColumn'],
+        ['attribute' => 'id', 'visible' => false],
+        'fecha',
+        'calculo_estimado',
+            ];
+    echo Gridview::widget([
+        'dataProvider' => $providerDetPrediccion,
+        'panel' => [
+            'type' => GridView::TYPE_PRIMARY,
+            'heading' => Html::encode(Yii::t('app', 'Det Prediccion')),
+        ],
+        'panelHeadingTemplate' => '<h4>{heading}</h4>{summary}',
+        'toggleData' => false,
+        'columns' => $gridColumnDetPrediccion
+    ]);
+}
 ?>
     </div>
 </div>

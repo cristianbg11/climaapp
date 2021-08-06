@@ -1,14 +1,14 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\PrediccionSearch */
+/* @var $searchModel frontend\models\DetPrediccionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
 use kartik\export\ExportMenu;
 use kartik\grid\GridView;
 
-$this->title = Yii::t('app', 'Prediccion');
+$this->title = Yii::t('app', 'Det Prediccions');
 $this->params['breadcrumbs'][] = $this->title;
 $search = "$('.search-button').click(function(){
 	$('.search-form').toggle(1000);
@@ -16,13 +16,13 @@ $search = "$('.search-button').click(function(){
 });";
 $this->registerJs($search);
 ?>
-<div class="prediccion-index">
+<div class="det-prediccion-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Prediccion'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Det Prediccion'), ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('app', 'Advance Search'), '#', ['class' => 'btn btn-info search-button']) ?>
     </p>
     <div class="search-form" style="display:none">
@@ -44,43 +44,29 @@ $this->registerJs($search);
             'expandOneOnly' => true
         ],
         ['attribute' => 'id', 'visible' => false],
-      /*  [
-                'attribute' => 'id_variable',
-                'label' => Yii::t('app', 'Id Variable'),
-                'value' => function($model){
-                    if ($model->variable)
-                    {return $model->variable->id;}
-                    else
-                    {return NULL;}
-                },
-                'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Variable::find()->asArray()->all(), 'id', 'id'),
-                'filterWidgetOptions' => [
-                    'pluginOptions' => ['allowClear' => true],
-                ],
-                'filterInputOptions' => ['placeholder' => 'Variable', 'id' => 'grid-prediccion-search-id_variable']
-            ],*/
         'fecha',
-      //  'fecha_estimada',
-     //   'calculo_estimado',
+        'calculo_estimado',
         [
-                'attribute' => 'id_cultivo',
-                'label' => Yii::t('app', 'Id Cultivo'),
-                'value' => function($model){
-                    if ($model->cultivo)
-                    {return $model->cultivo->Cultivo;}
-                    else
-                    {return NULL;}
+                'attribute' => 'id_prediccion',
+                'label' => Yii::t('app', 'Id Prediccion'),
+                'value' => function($model){                   
+                    return $model->prediccion->fecha;                   
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Cultivo::find()->asArray()->all(), 'id', 'id'),
+                'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Prediccion::find()->asArray()->all(), 'id', 'fecha'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => 'Cultivo', 'id' => 'grid-prediccion-search-id_cultivo']
+                'filterInputOptions' => ['placeholder' => 'Prediccion', 'id' => 'grid-det-prediccion-search-id_prediccion']
             ],
         [
             'class' => 'yii\grid\ActionColumn',
+            'template' => '{save-as-new} {view} {update} {delete}',
+            'buttons' => [
+                'save-as-new' => function ($url) {
+                    return Html::a('<span class="glyphicon glyphicon-copy"></span>', $url, ['title' => 'Save As New']);
+                },
+            ],
         ],
     ]; 
     ?>
@@ -89,7 +75,7 @@ $this->registerJs($search);
         'filterModel' => $searchModel,
         'columns' => $gridColumn,
         'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-prediccion']],
+        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-det-prediccion']],
         'panel' => [
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),

@@ -34,7 +34,7 @@ class Cultivo extends \yii\db\ActiveRecord
     {
         return [
             [['Cultivo', 'Coeficiente'], 'required'],
-            [['Coeficiente','id_cultivo'], 'number'],
+            [['Coeficiente','Desarrollo', 'Media', 'Maduracion','id_cultivo'], 'number'],
             [['Cultivo'], 'string', 'max' => 50]
         ];
     }

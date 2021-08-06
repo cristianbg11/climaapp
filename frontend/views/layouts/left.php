@@ -5,7 +5,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                
             </div>
             <div class="pull-left info">
                 <p>Cristian</p>
@@ -31,15 +31,17 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    //['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
+                    //['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Finca', 'url' => ['/finca']],
                     ['label' => 'Productores', 'url' => ['/productor']],
                     ['label' => 'Estaciones', 'url' => ['/estacion']],
                     ['label' => 'Data', 'url' => ['/data']],
                     ['label' => 'Cultivo', 'url' => ['/cultivo']],
                     ['label' => 'Predicciones', 'url' => ['/prediccion']],
+                    ['label' => 'Detalles', 'url' => ['/detprediccion']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                    /*
                     [
                         'label' => 'Some tools',
                         'icon' => 'share',
@@ -65,7 +67,7 @@
                                 ],
                             ],
                         ],
-                    ],
+                    ],*/
                 ],
             ]
         ) ?>

@@ -18,7 +18,7 @@ class Cultivo extends BaseCultivo
         return array_replace_recursive(parent::rules(),
 	    [
             [['Cultivo', 'Coeficiente'], 'required'],
-            [['Coeficiente','id_cultivo'], 'number'],
+            [['Coeficiente', 'Desarrollo', 'Media', 'Maduracion', 'id_cultivo'], 'number'],
             [['Cultivo'], 'string', 'max' => 50]
         ]);
     }

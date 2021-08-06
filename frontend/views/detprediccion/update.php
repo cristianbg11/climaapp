@@ -3,16 +3,16 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Prediccion */
+/* @var $model frontend\models\DetPrediccion */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Prediccion',
+    'modelClass' => 'Det Prediccion',
 ]) . ' ' . $model->fecha;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Prediccion'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Det Prediccions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->fecha, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="prediccion-update">
+<div class="det-prediccion-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

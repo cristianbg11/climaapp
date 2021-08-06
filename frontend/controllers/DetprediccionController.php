@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Cultivo;
-use frontend\models\CultivoSearch;
+use frontend\models\DetPrediccion;
+use frontend\models\DetPrediccionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CultivoController implements the CRUD actions for Cultivo model.
+ * DetprediccionController implements the CRUD actions for DetPrediccion model.
  */
-class CultivoController extends Controller
+class DetprediccionController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class CultivoController extends Controller
     }
 
     /**
-     * Lists all Cultivo models.
+     * Lists all DetPrediccion models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CultivoSearch();
+        $searchModel = new DetPrediccionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,28 +42,28 @@ class CultivoController extends Controller
     }
 
     /**
-     * Displays a single Cultivo model.
+     * Displays a single DetPrediccion model.
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id,$ini=false,$fin=false)
+    public function actionView($id)
     {
         $model = $this->findModel($id);
         return $this->render('view', [
-            'model' => $this->findModel($id),'ini'=>$ini,'fin'=>$fin
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Cultivo model.
+     * Creates a new DetPrediccion model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Cultivo();
+        $model = new DetPrediccion();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -73,7 +73,7 @@ class CultivoController extends Controller
     }
 
     /**
-     * Updates an existing Cultivo model.
+     * Updates an existing DetPrediccion model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -81,7 +81,7 @@ class CultivoController extends Controller
     public function actionUpdate($id)
     {
         if (Yii::$app->request->post('_asnew') == '1') {
-            $model = new Cultivo();
+            $model = new DetPrediccion();
         }else{
             $model = $this->findModel($id);
         }
@@ -96,7 +96,7 @@ class CultivoController extends Controller
     }
 
     /**
-     * Deletes an existing Cultivo model.
+     * Deletes an existing DetPrediccion model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +110,7 @@ class CultivoController extends Controller
     
     /**
      * 
-     * Export Cultivo information into PDF format.
+     * Export DetPrediccion information into PDF format.
      * @param integer $id
      * @return mixed
      */
@@ -140,7 +140,7 @@ class CultivoController extends Controller
     }
 
     /**
-    * Creates a new Cultivo model by another data,
+    * Creates a new DetPrediccion model by another data,
     * so user don't need to input all field from scratch.
     * If creation is successful, the browser will be redirected to the 'view' page.
     *
@@ -148,7 +148,7 @@ class CultivoController extends Controller
     * @return mixed
     */
     public function actionSaveAsNew($id) {
-        $model = new Cultivo();
+        $model = new DetPrediccion();
 
         if (Yii::$app->request->post('_asnew') != '1') {
             $model = $this->findModel($id);
@@ -164,15 +164,15 @@ class CultivoController extends Controller
     }
     
     /**
-     * Finds the Cultivo model based on its primary key value.
+     * Finds the DetPrediccion model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Cultivo the loaded model
+     * @return DetPrediccion the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Cultivo::findOne($id)) !== null) {
+        if (($model = DetPrediccion::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
