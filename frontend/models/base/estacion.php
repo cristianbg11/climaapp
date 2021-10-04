@@ -9,6 +9,9 @@ use Yii;
  *
  * @property integer $id
  * @property string $Nombre
+ * @property string $ciudad
+ * @property string $latitud
+ * @property string $longitud
  * @property string $Ubicacion
  * @property string $Zona
  *
@@ -38,7 +41,9 @@ class estacion extends \yii\db\ActiveRecord
         return [
             [['Nombre', 'Ubicacion', 'Zona'], 'required'],
             [['Ubicacion'], 'string'],
-            [['Nombre', 'Zona'], 'string', 'max' => 50]
+            [['Nombre', 'Zona'], 'string', 'max' => 50],
+            [['ciudad'], 'string', 'max' => 100],
+            [['latitud', 'longitud'], 'string', 'max' => 250]
         ];
     }
 
@@ -58,6 +63,9 @@ class estacion extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'Nombre' => Yii::t('app', 'Nombre'),
+            'ciudad' => Yii::t('app', 'Ciudad'),
+            'latitud' => Yii::t('app', 'Latitud'),
+            'longitud' => Yii::t('app', 'Longitud'),
             'Ubicacion' => Yii::t('app', 'Ubicacion'),
             'Zona' => Yii::t('app', 'Zona'),
         ];

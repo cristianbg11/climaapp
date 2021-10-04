@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
     $gridColumn = [
         ['attribute' => 'id', 'visible' => false],
         'Nombre',
+        'ciudad',
+        'latitud',
+        'longitud',
         'Ubicacion:ntext',
         'Zona',
     ];

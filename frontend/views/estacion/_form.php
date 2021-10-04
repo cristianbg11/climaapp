@@ -27,6 +27,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true, 'placeholder' => 'Nombre']) ?>
 
+    <?= $form->field($model, 'ciudad')->textInput(['maxlength' => true, 'placeholder' => 'Ciudad']) ?>
+
+    <?= $form->field($model, 'latitud')->textInput(['maxlength' => true, 'placeholder' => 'Latitud']) ?>
+
+    <?= $form->field($model, 'longitud')->textInput(['maxlength' => true, 'placeholder' => 'Longitud']) ?>
+
     <?= $form->field($model, 'Ubicacion')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'Zona')->textInput(['maxlength' => true, 'placeholder' => 'Zona']) ?>

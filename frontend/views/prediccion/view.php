@@ -29,15 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             )?>
             
-            <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ])
-            ?>
+            
         </div>
     </div>
 
@@ -143,7 +135,7 @@ if($providerDetPrediccion->totalCount){
 
     }
 
-    echo '<div><label class="btn btn-warning">Densidad en etapa de Desarrollo para coeificiente: '.$model->cultivo->Desarrollo.'</label>';
+    echo '<div><label class="btn btn-warning">Demanda neta en etapa de Desarrollo para coeificiente: '.$model->cultivo->Desarrollo.'</label>';
     echo ChartJs::widget([
         'type' => 'line',
         'options' => [
@@ -154,7 +146,7 @@ if($providerDetPrediccion->totalCount){
             'labels' =>$arrfecha, //["January", "February", "March", "April", "May", "June", "July"],
             'datasets' => [
                 [
-                    'label' => "Maduracion",
+                    'label' => "Desarrollo",
                     'backgroundColor' => "rgba(179,181,198,0.2)",
                     'borderColor' => "rgba(179,181,198,1)",
                     'pointBackgroundColor' => "rgba(179,181,198,1)",
@@ -168,7 +160,7 @@ if($providerDetPrediccion->totalCount){
     ]);
     echo '</div>';
 
-    echo '<div><label class="btn btn-warning">Densidad en etapa de media para coeificiente: '.$model->cultivo->Media.'</label>';
+    echo '<div><label class="btn btn-warning">Demanda neta en etapa de media para coeificiente: '.$model->cultivo->Media.'</label>';
     echo ChartJs::widget([
         'type' => 'line',
         'options' => [
@@ -179,7 +171,7 @@ if($providerDetPrediccion->totalCount){
             'labels' =>$arrfecha, //["January", "February", "March", "April", "May", "June", "July"],
             'datasets' => [
                 [
-                    'label' => "Maduracion",
+                    'label' => "Media",
                     'backgroundColor' => "rgba(179,181,198,0.2)",
                     'borderColor' => "rgba(179,181,198,1)",
                     'pointBackgroundColor' => "rgba(179,181,198,1)",
@@ -193,7 +185,7 @@ if($providerDetPrediccion->totalCount){
     ]);
     echo '</div>';
 
-    echo '<div><label class="btn btn-warning">Densidad en etapa de maduracion para coeificiente: '.$model->cultivo->Maduracion.'</label>';
+    echo '<div><label class="btn btn-warning">Demanda neta en etapa de maduracion para coeificiente: '.$model->cultivo->Maduracion.'</label>';
     echo ChartJs::widget([
         'type' => 'line',
         'options' => [

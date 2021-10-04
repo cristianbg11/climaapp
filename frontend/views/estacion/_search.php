@@ -19,9 +19,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true, 'placeholder' => 'Nombre']) ?>
 
-    <?= $form->field($model, 'Ubicacion')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'ciudad')->textInput(['maxlength' => true, 'placeholder' => 'Ciudad']) ?>
 
-    <?= $form->field($model, 'Zona')->textInput(['maxlength' => true, 'placeholder' => 'Zona']) ?>
+    <?= $form->field($model, 'latitud')->textInput(['maxlength' => true, 'placeholder' => 'Latitud']) ?>
+
+    <?= $form->field($model, 'longitud')->textInput(['maxlength' => true, 'placeholder' => 'Longitud']) ?>
+
+    <?php /* echo $form->field($model, 'Ubicacion')->textarea(['rows' => 6]) */ ?>
+
+    <?php /* echo $form->field($model, 'Zona')->textInput(['maxlength' => true, 'placeholder' => 'Zona']) */ ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

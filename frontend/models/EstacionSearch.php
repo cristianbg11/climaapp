@@ -19,7 +19,7 @@ use frontend\models\estacion;
     {
         return [
             [['id'], 'integer'],
-            [['Nombre', 'Ubicacion', 'Zona'], 'safe'],
+            [['Nombre', 'ciudad', 'latitud', 'longitud', 'Ubicacion', 'Zona'], 'safe'],
         ];
     }
 
@@ -60,6 +60,9 @@ use frontend\models\estacion;
         ]);
 
         $query->andFilterWhere(['like', 'Nombre', $this->Nombre])
+            ->andFilterWhere(['like', 'ciudad', $this->ciudad])
+            ->andFilterWhere(['like', 'latitud', $this->latitud])
+            ->andFilterWhere(['like', 'longitud', $this->longitud])
             ->andFilterWhere(['like', 'Ubicacion', $this->Ubicacion])
             ->andFilterWhere(['like', 'Zona', $this->Zona]);
 

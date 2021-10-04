@@ -94,10 +94,10 @@ if len(sys.argv)==5:
 	end_date=sys.argv[4]
 else:
 	#inputs
-	column_name=input("Enter a Column Name to Predict(Temp_out/Out_Hum/Wind_Speed/Solar_Rad/ET/ETP:")
-	no_of_days=input('No of Future Days you want to predict: ')
-	start_date=input('Enter Start Date of Forecast View(Ex:2020-05-17): ') 
-	end_date=input('Enter End Date of Forecast View(Ex:2020-08-18): ')
+	column_name=input("Ingrese nombre de columna a predecir(Temp_out/Out_Hum/Wind_Speed/Solar_Rad/ET/ETP:")
+	no_of_days=input('Numeros de dias a predecir: ')
+	start_date=input('Fecha inicial a predecir(Ex:2020-05-17): ')
+	end_date=input('Fecha final a predecir(Ex:2020-08-18): ')
 
 
 # In[3]:

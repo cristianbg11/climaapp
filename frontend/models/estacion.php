@@ -19,7 +19,9 @@ class estacion extends Baseestacion
 	    [
             [['Nombre', 'Ubicacion', 'Zona'], 'required'],
             [['Ubicacion'], 'string'],
-            [['Nombre', 'Zona'], 'string', 'max' => 50]
+            [['Nombre', 'Zona'], 'string', 'max' => 50],
+            [['ciudad'], 'string', 'max' => 100],
+            [['latitud', 'longitud'], 'string', 'max' => 250]
         ]);
     }
 	

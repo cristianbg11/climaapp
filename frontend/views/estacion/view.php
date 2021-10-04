@@ -46,7 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
     $gridColumn = [
         ['attribute' => 'id', 'visible' => false],
         'Nombre',
-     //   'Ubicacion:ntext',
+        'ciudad',
+        'latitud',
+        'longitud',
+        'Ubicacion:ntext',
         'Zona',
     ];
     echo DetailView::widget([
@@ -54,7 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => $gridColumn
     ]);
 ?>
-<?php echo $model->Ubicacion;?>
     </div>
     
     <div class="row">

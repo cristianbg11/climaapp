@@ -23,26 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2><?= Yii::t('app', 'Cultivo').' '. Html::encode($this->title) ?></h2>
         </div>
         <div class="col-sm-4" style="margin-top: 15px">
-<?=             
-             Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> ' . Yii::t('app', 'PDF'), 
-                ['pdf', 'id' => $model->id],
-                [
-                    'class' => 'btn btn-danger',
-                    'target' => '_blank',
-                    'data-toggle' => 'tooltip',
-                    'title' => Yii::t('app', 'Will open the generated PDF file in a new window')
-                ]
-            )?>
-            <?= Html::a(Yii::t('app', 'Save As New'), ['save-as-new', 'id' => $model->id], ['class' => 'btn btn-info']) ?>            
-            <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ])
-            ?>
+
+            
         </div>
     </div>
 
@@ -51,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
     $gridColumn = [
         ['attribute' => 'id', 'visible' => false],
         'Cultivo',
-       // 'Coeficiente',
+       'Coeficiente',
        'Desarrollo',
         'Media',
          'Maduracion',
@@ -103,6 +85,10 @@ if(!$modelpred->save()){
     foreach($predData as $fecha=>$valor){
         $fecha=$fecha/1000;
         $arrfecha[]=date('Y-m-d',$fecha);
+
+        $arrvalinicial[]=($valor*24)*$model->Coeficiente;
+        $arr_densidad_desarrollo[]=(($valor*24)*$model->Coeficiente)*$area;
+
         $arrvalr[]=($valor*24)*$model->Desarrollo;
         $arr_densidad_desarrollo[]=(($valor*24)*$model->Desarrollo)*$area;
 
@@ -123,7 +109,7 @@ if(!$modelpred->save()){
       }
         echo date('Y-m-d',$fecha)." : $valor <br>";
     }
-    echo '<div><label class="btn btn-warning">Kto en etapa de Desarrollo para coeificiente: '.$model->Desarrollo.'</label>';
+    echo '<div><label class="btn btn-warning">Deficit hidrico en etapa inicial para coeificiente: '.$model->Coeficiente.'</label>';
     echo ChartJs::widget([
         'type' => 'line',
         'options' => [
@@ -134,7 +120,31 @@ if(!$modelpred->save()){
             'labels' =>$arrfecha, //["January", "February", "March", "April", "May", "June", "July"],
             'datasets' => [
                 [
-                    'label' => "Maduracion",
+                    'label' => "Inicial",
+                    'backgroundColor' => "rgba(179,181,198,0.2)",
+                    'borderColor' => "rgba(179,181,198,1)",
+                    'pointBackgroundColor' => "rgba(179,181,198,1)",
+                    'pointBorderColor' => "#fff",
+                    'pointHoverBackgroundColor' => "#fff",
+                    'pointHoverBorderColor' => "rgba(179,181,198,1)",
+                    'data' =>$arrvalinicial, //[65, 59, 90, 81, 56, 55, 40]
+                ],
+            ]
+        ]
+    ]);
+    echo '</div><div><label class="btn btn-info">Deficit hidrico en etapa de Desarrollo para coeificiente: '.$model->Desarrollo.'</label>';
+
+    echo ChartJs::widget([
+        'type' => 'line',
+        'options' => [
+            'height' => 100,
+            'width' => 100
+        ],
+        'data' => [
+            'labels' =>$arrfecha, //["January", "February", "March", "April", "May", "June", "July"],
+            'datasets' => [
+                [
+                    'label' => "Desarrollo",
                     'backgroundColor' => "rgba(179,181,198,0.2)",
                     'borderColor' => "rgba(179,181,198,1)",
                     'pointBackgroundColor' => "rgba(179,181,198,1)",
@@ -146,7 +156,9 @@ if(!$modelpred->save()){
             ]
         ]
     ]);
-    echo '</div><div><label class="btn btn-info">Densidad de agua en etapa de Desarrollo para coeificiente: '.$model->Desarrollo.'</label>';
+    echo "</div>";
+
+    echo '</div><div><label class="btn btn-info">Deficit hidrico en etapa media para coeificiente: '.$model->Media.'</label>';
 
     echo ChartJs::widget([
         'type' => 'line',
@@ -165,7 +177,33 @@ if(!$modelpred->save()){
                     'pointBorderColor' => "#fff",
                     'pointHoverBackgroundColor' => "#fff",
                     'pointHoverBorderColor' => "rgba(179,181,198,1)",
-                    'data' =>$arr_densidad_desarrollo, //[65, 59, 90, 81, 56, 55, 40]
+                    'data' =>$arrvalmedia, //[65, 59, 90, 81, 56, 55, 40]
+                ],
+            ]
+        ]
+    ]);
+    echo "</div>";
+
+    echo '</div><div><label class="btn btn-info">Deficit hidrico en etapa maduracion para coeificiente: '.$model->Maduracion.'</label>';
+
+    echo ChartJs::widget([
+        'type' => 'line',
+        'options' => [
+            'height' => 100,
+            'width' => 100
+        ],
+        'data' => [
+            'labels' =>$arrfecha, //["January", "February", "March", "April", "May", "June", "July"],
+            'datasets' => [
+                [
+                    'label' => "Maduracion",
+                    'backgroundColor' => "rgba(179,181,198,0.2)",
+                    'borderColor' => "rgba(179,181,198,1)",
+                    'pointBackgroundColor' => "rgba(179,181,198,1)",
+                    'pointBorderColor' => "#fff",
+                    'pointHoverBackgroundColor' => "#fff",
+                    'pointHoverBorderColor' => "rgba(179,181,198,1)",
+                    'data' =>$arrvalduracion, //[65, 59, 90, 81, 56, 55, 40]
                 ],
             ]
         ]

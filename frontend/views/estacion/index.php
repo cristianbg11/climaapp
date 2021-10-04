@@ -33,7 +33,10 @@ $this->registerJs($search);
         ['class' => 'yii\grid\SerialColumn'],
         ['attribute' => 'id', 'visible' => false],
         'Nombre',
-        //'Ubicacion:ntext',
+        'ciudad',
+        'latitud',
+        'longitud',
+        'Ubicacion:ntext',
         'Zona',
         [
             'class' => 'yii\grid\ActionColumn',
