@@ -3,11 +3,11 @@
 namespace frontend\models;
 
 /**
- * This is the ActiveQuery class for [[Lectura]].
+ * This is the ActiveQuery class for [[CultivoFinca]].
  *
- * @see Lectura
+ * @see CultivoFinca
  */
-class LecturaQuery extends \yii\db\ActiveQuery
+class CultivoFincaQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -17,7 +17,7 @@ class LecturaQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Lectura[]|array
+     * @return CultivoFinca[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class LecturaQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Lectura|array|null
+     * @return CultivoFinca|array|null
      */
     public function one($db = null)
     {

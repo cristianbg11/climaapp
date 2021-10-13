@@ -5,9 +5,9 @@ use yii\widgets\DetailView;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\lectura */
+/* @var $model frontend\models\Lectura */
 
-$this->title = $model->id;
+$this->title = $model->fecha;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Lecturas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -25,14 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
         ['attribute' => 'id', 'visible' => false],
         'fecha',
         [
-                'attribute' => 'estaciones.Nombre',
+                'attribute' => 'estaciones.id',
                 'label' => Yii::t('app', 'Id Estaciones')
             ],
         [
-                'attribute' => 'variable.Nombre',
+                'attribute' => 'variable.id',
                 'label' => Yii::t('app', 'Id Variable')
             ],
         'valor',
+        'station_id',
+        'ts',
+        'date',
+        'temp_out',
+        'hum_out',
+        'et',
+        'solar_rad',
+        'wind_speed',
     ];
     echo DetailView::widget([
         'model' => $model,

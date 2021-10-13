@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\lectura */
+/* @var $model frontend\models\Lectura */
 
 $this->title = Yii::t('app', 'Save As New {modelClass}: ', [
     'modelClass' => 'Lectura',
-]). ' ' . $model->id;
+]). ' ' . $model->fecha;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Lecturas'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->fecha, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Save As New');
 ?>
 <div class="lectura-create">

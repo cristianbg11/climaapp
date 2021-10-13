@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Lectura;
-use frontend\models\LecturaSearch;
+use frontend\models\CultivoFinca;
+use frontend\models\CultivoFincaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LecturaController implements the CRUD actions for Lectura model.
+ * CultivoFincaController implements the CRUD actions for CultivoFinca model.
  */
-class LecturaController extends Controller
+class CultivoFincaController extends Controller
 {
     public function behaviors()
     {
@@ -25,50 +25,14 @@ class LecturaController extends Controller
             ],
         ];
     }
-    public function actionImportar()
-    {
-        $estaciones = [7, 15, 21, 26, 33];
-        $fila = 1;
-        if (($gestor = fopen("station_data.csv", "r")) !== FALSE) {
 
-            \Yii::$app->db->createCommand()->truncateTable('lectura')->execute();
-
-
-            while (($datos = fgetcsv($gestor, 10000, ",")) !== FALSE) {
-                if ($fila > 1) {
-                    
-                    if (in_array($datos[1], $estaciones)) {
-
-                        $lectura = new Lectura();
-                        $lectura->id = $datos[0];
-                        $lectura->id_estacion = $datos[1];
-                        $lectura->ts = $datos[2];
-                        $lectura->fecha = $datos[3];
-                        $lectura->temp_out = $datos[6];
-                        $lectura->hum_out = $datos[11];
-                        $lectura->et = $datos[33];
-                        $lectura->solar_rad = $datos[41];
-                        $lectura->wind_speed = $datos[46];
-
-
-                        if (!$lectura->save()) {
-                            print_r($lectura->getErrors());
-                            die();;
-                        }
-                    }
-                }
-                $fila++;
-            }
-            fclose($gestor);
-        }
-    }
     /**
-     * Lists all Lectura models.
+     * Lists all CultivoFinca models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new LecturaSearch();
+        $searchModel = new CultivoFincaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -78,7 +42,7 @@ class LecturaController extends Controller
     }
 
     /**
-     * Displays a single Lectura model.
+     * Displays a single CultivoFinca model.
      * @param integer $id
      * @return mixed
      */
@@ -91,13 +55,13 @@ class LecturaController extends Controller
     }
 
     /**
-     * Creates a new Lectura model.
+     * Creates a new CultivoFinca model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Lectura();
+        $model = new CultivoFinca();
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -109,7 +73,7 @@ class LecturaController extends Controller
     }
 
     /**
-     * Updates an existing Lectura model.
+     * Updates an existing CultivoFinca model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -117,8 +81,8 @@ class LecturaController extends Controller
     public function actionUpdate($id)
     {
         if (Yii::$app->request->post('_asnew') == '1') {
-            $model = new Lectura();
-        } else {
+            $model = new CultivoFinca();
+        }else{
             $model = $this->findModel($id);
         }
 
@@ -132,7 +96,7 @@ class LecturaController extends Controller
     }
 
     /**
-     * Deletes an existing Lectura model.
+     * Deletes an existing CultivoFinca model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -143,15 +107,14 @@ class LecturaController extends Controller
 
         return $this->redirect(['index']);
     }
-
+    
     /**
      * 
-     * Export Lectura information into PDF format.
+     * Export CultivoFinca information into PDF format.
      * @param integer $id
      * @return mixed
      */
-    public function actionPdf($id)
-    {
+    public function actionPdf($id) {
         $model = $this->findModel($id);
 
         $content = $this->renderAjax('_pdf', [
@@ -177,21 +140,20 @@ class LecturaController extends Controller
     }
 
     /**
-     * Creates a new Lectura model by another data,
-     * so user don't need to input all field from scratch.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     *
-     * @param mixed $id
-     * @return mixed
-     */
-    public function actionSaveAsNew($id)
-    {
-        $model = new Lectura();
+    * Creates a new CultivoFinca model by another data,
+    * so user don't need to input all field from scratch.
+    * If creation is successful, the browser will be redirected to the 'view' page.
+    *
+    * @param mixed $id
+    * @return mixed
+    */
+    public function actionSaveAsNew($id) {
+        $model = new CultivoFinca();
 
         if (Yii::$app->request->post('_asnew') != '1') {
             $model = $this->findModel($id);
         }
-
+    
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -200,17 +162,17 @@ class LecturaController extends Controller
             ]);
         }
     }
-
+    
     /**
-     * Finds the Lectura model based on its primary key value.
+     * Finds the CultivoFinca model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Lectura the loaded model
+     * @return CultivoFinca the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Lectura::findOne($id)) !== null) {
+        if (($model = CultivoFinca::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));

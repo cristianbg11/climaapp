@@ -5,17 +5,17 @@ use yii\widgets\DetailView;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Lectura */
+/* @var $model frontend\models\CultivoFinca */
 
-$this->title = $model->fecha;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Lecturas'), 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cultivo Fincas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="lectura-view">
+<div class="cultivo-finca-view">
 
     <div class="row">
         <div class="col-sm-8">
-            <h2><?= Yii::t('app', 'Lectura').' '. Html::encode($this->title) ?></h2>
+            <h2><?= Yii::t('app', 'Cultivo Finca').' '. Html::encode($this->title) ?></h2>
         </div>
         <div class="col-sm-4" style="margin-top: 15px">
 <?=             
@@ -45,24 +45,15 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php 
     $gridColumn = [
         ['attribute' => 'id', 'visible' => false],
-        'fecha',
         [
-            'attribute' => 'estaciones.id',
-            'label' => Yii::t('app', 'Id Estaciones'),
+            'attribute' => 'finca.id',
+            'label' => Yii::t('app', 'Id Finca'),
         ],
         [
-            'attribute' => 'variable.id',
-            'label' => Yii::t('app', 'Id Variable'),
+            'attribute' => 'cultivo.id',
+            'label' => Yii::t('app', 'Id Cultivo'),
         ],
-        'valor',
-        'station_id',
-        'ts',
-        'date',
-        'temp_out',
-        'hum_out',
-        'et',
-        'solar_rad',
-        'wind_speed',
+        'tam_tareas',
     ];
     echo DetailView::widget([
         'model' => $model,
@@ -71,32 +62,33 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
     </div>
     <div class="row">
-        <h4>Variable<?= ' '. Html::encode($this->title) ?></h4>
+        <h4>Cultivo<?= ' '. Html::encode($this->title) ?></h4>
     </div>
     <?php 
-    $gridColumnVariable = [
+    $gridColumnCultivo = [
         ['attribute' => 'id', 'visible' => false],
-        'Nombre',
+        'Cultivo',
+        'Coeficiente',
+        'Desarrollo',
+        'Media',
+        'Maduracion',
     ];
     echo DetailView::widget([
-        'model' => $model->variable,
-        'attributes' => $gridColumnVariable    ]);
+        'model' => $model->cultivo,
+        'attributes' => $gridColumnCultivo    ]);
     ?>
     <div class="row">
-        <h4>Estacion<?= ' '. Html::encode($this->title) ?></h4>
+        <h4>Finca<?= ' '. Html::encode($this->title) ?></h4>
     </div>
     <?php 
-    $gridColumnEstacion = [
+    $gridColumnFinca = [
         ['attribute' => 'id', 'visible' => false],
         'Nombre',
-        'ciudad',
-        'latitud',
-        'longitud',
-        'Ubicacion',
-        'Zona',
+        'Localidad',
+        'id_productor',
     ];
     echo DetailView::widget([
-        'model' => $model->estaciones,
-        'attributes' => $gridColumnEstacion    ]);
+        'model' => $model->finca,
+        'attributes' => $gridColumnFinca    ]);
     ?>
 </div>

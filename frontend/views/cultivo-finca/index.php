@@ -1,14 +1,14 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\LecturaSearch */
+/* @var $searchModel frontend\models\CultivoFincaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
 use kartik\export\ExportMenu;
 use kartik\grid\GridView;
 
-$this->title = Yii::t('app', 'Lecturas');
+$this->title = Yii::t('app', 'Cultivo Fincas');
 $this->params['breadcrumbs'][] = $this->title;
 $search = "$('.search-button').click(function(){
 	$('.search-form').toggle(1000);
@@ -16,13 +16,13 @@ $search = "$('.search-button').click(function(){
 });";
 $this->registerJs($search);
 ?>
-<div class="lectura-index">
+<div class="cultivo-finca-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Lectura'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Cultivo Finca'), ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('app', 'Advance Search'), '#', ['class' => 'btn btn-info search-button']) ?>
     </p>
     <div class="search-form" style="display:none">
@@ -44,48 +44,33 @@ $this->registerJs($search);
             'expandOneOnly' => true
         ],
         ['attribute' => 'id', 'visible' => false],
-        'fecha',
         [
-                'attribute' => 'id_estaciones',
-                'label' => Yii::t('app', 'Id Estaciones'),
-                'value' => function($model){
-                    if ($model->estaciones)
-                    {return $model->estaciones->id;}
-                    else
-                    {return NULL;}
+                'attribute' => 'id_finca',
+                'label' => Yii::t('app', 'Id Finca'),
+                'value' => function($model){                   
+                    return $model->finca->id;                   
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Estacion::find()->asArray()->all(), 'id', 'id'),
+                'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Finca::find()->asArray()->all(), 'id', 'id'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => 'Estacion', 'id' => 'grid-lectura-search-id_estaciones']
+                'filterInputOptions' => ['placeholder' => 'Finca', 'id' => 'grid-cultivo-finca-search-id_finca']
             ],
         [
-                'attribute' => 'id_variable',
-                'label' => Yii::t('app', 'Id Variable'),
-                'value' => function($model){
-                    if ($model->variable)
-                    {return $model->variable->id;}
-                    else
-                    {return NULL;}
+                'attribute' => 'id_cultivo',
+                'label' => Yii::t('app', 'Id Cultivo'),
+                'value' => function($model){                   
+                    return $model->cultivo->id;                   
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Variable::find()->asArray()->all(), 'id', 'id'),
+                'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Cultivo::find()->asArray()->all(), 'id', 'id'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => 'Variable', 'id' => 'grid-lectura-search-id_variable']
+                'filterInputOptions' => ['placeholder' => 'Cultivo', 'id' => 'grid-cultivo-finca-search-id_cultivo']
             ],
-        'valor',
-        'station_id',
-        'ts',
-        'date',
-        'temp_out',
-        'hum_out',
-        'et',
-        'solar_rad',
-        'wind_speed',
+        'tam_tareas',
         [
             'class' => 'yii\grid\ActionColumn',
             'template' => '{save-as-new} {view} {update} {delete}',
@@ -102,7 +87,7 @@ $this->registerJs($search);
         'filterModel' => $searchModel,
         'columns' => $gridColumn,
         'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-lectura']],
+        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-cultivo-finca']],
         'panel' => [
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),

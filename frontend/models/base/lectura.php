@@ -9,14 +9,20 @@ use Yii;
  *
  * @property integer $id
  * @property string $fecha
- * @property integer $id_estaciones
+ * @property integer $id_estacion
  * @property integer $id_variable
  * @property integer $valor
+ * @property double $ts
+ * @property double $temp_out
+ * @property double $hum_out
+ * @property double $et
+ * @property double $solar_rad
+ * @property double $wind_speed
  *
  * @property \frontend\models\Variable $variable
- * @property \frontend\models\Estacion $estaciones
+ * @property \frontend\models\Estacion $estacion
  */
-class lectura extends \yii\db\ActiveRecord
+class Lectura extends \yii\db\ActiveRecord
 {
     use \mootensai\relation\RelationTrait;
 
@@ -29,7 +35,7 @@ class lectura extends \yii\db\ActiveRecord
     {
         return [
             'variable',
-            'estaciones'
+            'estacion'
         ];
     }
 
@@ -39,7 +45,9 @@ class lectura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_estaciones', 'id_variable', 'valor'], 'integer'],
+            [['id_estacion', 'id_variable', 'valor'], 'integer'],
+            [['ts', 'temp_out', 'hum_out', 'et', 'solar_rad', 'wind_speed'], 'required'],
+            [['ts', 'temp_out', 'hum_out', 'et', 'solar_rad', 'wind_speed'], 'number'],
             [['fecha'], 'string', 'max' => 80]
         ];
     }
@@ -60,9 +68,15 @@ class lectura extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'fecha' => Yii::t('app', 'Fecha'),
-            'id_estaciones' => Yii::t('app', 'Id Estaciones'),
+            'id_estacion' => Yii::t('app', 'Id Estacion'),
             'id_variable' => Yii::t('app', 'Id Variable'),
             'valor' => Yii::t('app', 'Valor'),
+            'ts' => Yii::t('app', 'Ts'),
+            'temp_out' => Yii::t('app', 'Temp Out'),
+            'hum_out' => Yii::t('app', 'Hum Out'),
+            'et' => Yii::t('app', 'Et'),
+            'solar_rad' => Yii::t('app', 'Solar Rad'),
+            'wind_speed' => Yii::t('app', 'Wind Speed'),
         ];
     }
     
@@ -77,18 +91,18 @@ class lectura extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstaciones()
+    public function getEstacion()
     {
-        return $this->hasOne(\frontend\models\Estacion::className(), ['id' => 'id_estaciones']);
+        return $this->hasOne(\frontend\models\Estacion::className(), ['id' => 'id_estacion']);
     }
     
 
     /**
      * @inheritdoc
-     * @return \frontend\models\lecturaQuery the active query used by this AR class.
+     * @return \frontend\models\LecturaQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \frontend\models\lecturaQuery(get_called_class());
+        return new \frontend\models\LecturaQuery(get_called_class());
     }
 }

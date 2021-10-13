@@ -3,12 +3,12 @@
 namespace frontend\models;
 
 use Yii;
-use \frontend\models\base\lectura as Baselectura;
+use \frontend\models\base\Lectura as BaseLectura;
 
 /**
  * This is the model class for table "lectura".
  */
-class lectura extends Baselectura
+class Lectura extends BaseLectura
 {
     /**
      * @inheritdoc
@@ -17,7 +17,9 @@ class lectura extends Baselectura
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['id_estaciones', 'id_variable', 'valor'], 'integer'],
+            [['id_estacion', 'id_variable', 'valor'], 'integer'],
+            [['ts', 'temp_out', 'hum_out', 'et', 'solar_rad', 'wind_speed'], 'required'],
+            [['ts', 'temp_out', 'hum_out', 'et', 'solar_rad', 'wind_speed'], 'number'],
             [['fecha'], 'string', 'max' => 80]
         ]);
     }

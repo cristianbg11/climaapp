@@ -5,14 +5,14 @@ use yii\widgets\DetailView;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\lectura */
+/* @var $model frontend\models\Lectura */
 
 ?>
 <div class="lectura-view">
 
     <div class="row">
         <div class="col-sm-9">
-            <h2><?= Html::encode($model->id) ?></h2>
+            <h2><?= Html::encode($model->fecha) ?></h2>
         </div>
     </div>
 
@@ -22,14 +22,22 @@ use kartik\grid\GridView;
         ['attribute' => 'id', 'visible' => false],
         'fecha',
         [
-            'attribute' => 'estaciones.Nombre',
+            'attribute' => 'estaciones.id',
             'label' => Yii::t('app', 'Id Estaciones'),
         ],
         [
-            'attribute' => 'variable.Nombre',
+            'attribute' => 'variable.id',
             'label' => Yii::t('app', 'Id Variable'),
         ],
         'valor',
+        'station_id',
+        'ts',
+        'date',
+        'temp_out',
+        'hum_out',
+        'et',
+        'solar_rad',
+        'wind_speed',
     ];
     echo DetailView::widget([
         'model' => $model,
