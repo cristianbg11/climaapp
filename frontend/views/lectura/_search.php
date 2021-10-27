@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'fecha')->textInput(['maxlength' => true, 'placeholder' => 'Fecha']) ?>
 
-    <?= $form->field($model, 'id_estaciones')->widget(\kartik\widgets\Select2::classname(), [
+    <?= $form->field($model, 'id_estacion')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\frontend\models\Estacion::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
         'options' => ['placeholder' => Yii::t('app', 'Choose Estacion')],
         'pluginOptions' => [

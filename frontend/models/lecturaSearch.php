@@ -18,8 +18,8 @@ use frontend\models\Lectura;
     public function rules()
     {
         return [
-            [['id', 'id_estaciones', 'id_variable', 'valor', 'station_id'], 'integer'],
-            [['fecha', 'date'], 'safe'],
+            [['id', 'id_estacion', 'id_variable', 'valor'], 'integer'],
+            [['fecha'], 'safe'],
             [['ts', 'temp_out', 'hum_out', 'et', 'solar_rad', 'wind_speed'], 'number'],
         ];
     }
@@ -58,10 +58,10 @@ use frontend\models\Lectura;
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_estaciones' => $this->id_estaciones,
+            'id_estacion' => $this->id_estacion,
             'id_variable' => $this->id_variable,
             'valor' => $this->valor,
-            'station_id' => $this->station_id,
+           // 'station_id' => $this->station_id,
             'ts' => $this->ts,
             'temp_out' => $this->temp_out,
             'hum_out' => $this->hum_out,
@@ -71,7 +71,8 @@ use frontend\models\Lectura;
         ]);
 
         $query->andFilterWhere(['like', 'fecha', $this->fecha])
-            ->andFilterWhere(['like', 'date', $this->date]);
+          //  ->andFilterWhere(['like', 'date', $this->date])
+            ;
 
         return $dataProvider;
     }

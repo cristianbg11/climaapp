@@ -45,7 +45,7 @@ $this->registerJs($search);
         ],
         ['attribute' => 'id', 'visible' => false],
         'fecha',
-        [
+        /*[
                 'attribute' => 'id_estaciones',
                 'label' => Yii::t('app', 'Id Estaciones'),
                 'value' => function($model){
@@ -60,7 +60,7 @@ $this->registerJs($search);
                     'pluginOptions' => ['allowClear' => true],
                 ],
                 'filterInputOptions' => ['placeholder' => 'Estacion', 'id' => 'grid-lectura-search-id_estaciones']
-            ],
+            ],*/
         [
                 'attribute' => 'id_variable',
                 'label' => Yii::t('app', 'Id Variable'),

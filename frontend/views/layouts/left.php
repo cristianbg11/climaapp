@@ -36,10 +36,12 @@
                     ['label' => 'Finca', 'url' => ['/finca']],
                     ['label' => 'Productores', 'url' => ['/productor']],
                     ['label' => 'Estaciones', 'url' => ['/estacion']],
-                    ['label' => 'Data', 'url' => ['/data']],
+                    ['label' => 'Lecturas', 'url' => ['/lectura']],
                     ['label' => 'Cultivo', 'url' => ['/cultivo']],
                     ['label' => 'Predicciones', 'url' => ['/prediccion']],
                     ['label' => 'Detalles', 'url' => ['/detprediccion']],
+                    ['label' => 'mapa lectura', 'url' => ['/lectura/mapalectura']],
+                    ['label' => 'crear prediccion ', 'url' => ['/prediccionhecha/create']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     /*
                     [

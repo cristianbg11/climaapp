@@ -3,11 +3,11 @@
 namespace frontend\models;
 
 /**
- * This is the ActiveQuery class for [[estacion]].
+ * This is the ActiveQuery class for [[Estacion]].
  *
- * @see estacion
+ * @see Estacion
  */
-class estacionQuery extends \yii\db\ActiveQuery
+class EstacionQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -17,7 +17,7 @@ class estacionQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return estacion[]|array
+     * @return Estacion[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class estacionQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return estacion|array|null
+     * @return Estacion|array|null
      */
     public function one($db = null)
     {

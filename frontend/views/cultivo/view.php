@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
 if($ini!=false && $fin!=false){
     //echo "<h3>Prediccion de $ini a $fin</h3>";
 chdir ('C:\xampp\htdocs\climaapp\frontend\views\site');
-$output = shell_exec("python WDA_Forecast_FBProphet_Params.py Temp_out 800 $ini $fin");
+$output = shell_exec("python WDA_Forecast_FBProphet_Params.py ET 800 $ini $fin");
 $arr= explode('**progdata**',$output);
 $arrfecha=[];
 $arrvalr=[];//para coeficiente en desarrollo

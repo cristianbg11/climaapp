@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\estacion */
+/* @var $model frontend\models\Estacion */
 
 ?>
 <div class="estacion-view">
@@ -21,6 +21,9 @@ use kartik\grid\GridView;
     $gridColumn = [
         ['attribute' => 'id', 'visible' => false],
         'Nombre',
+        'ciudad',
+        'latitud',
+        'longitud',
         'Ubicacion:ntext',
         'Zona',
     ];

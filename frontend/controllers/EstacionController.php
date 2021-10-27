@@ -3,14 +3,14 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\estacion;
-use frontend\models\estacionSearch;
+use frontend\models\Estacion;
+use frontend\models\EstacionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EstacionController implements the CRUD actions for estacion model.
+ * EstacionController implements the CRUD actions for Estacion model.
  */
 class EstacionController extends Controller
 {
@@ -27,12 +27,12 @@ class EstacionController extends Controller
     }
 
     /**
-     * Lists all estacion models.
+     * Lists all Estacion models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new estacionSearch();
+        $searchModel = new EstacionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class EstacionController extends Controller
     }
 
     /**
-     * Displays a single estacion model.
+     * Displays a single Estacion model.
      * @param integer $id
      * @return mixed
      */
@@ -59,13 +59,13 @@ class EstacionController extends Controller
     }
 
     /**
-     * Creates a new estacion model.
+     * Creates a new Estacion model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new estacion();
+        $model = new Estacion();
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -77,18 +77,14 @@ class EstacionController extends Controller
     }
 
     /**
-     * Updates an existing estacion model.
+     * Updates an existing Estacion model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->request->post('_asnew') == '1') {
-            $model = new estacion();
-        }else{
-            $model = $this->findModel($id);
-        }
+        $model = $this->findModel($id);
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -100,7 +96,7 @@ class EstacionController extends Controller
     }
 
     /**
-     * Deletes an existing estacion model.
+     * Deletes an existing Estacion model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -111,76 +107,18 @@ class EstacionController extends Controller
 
         return $this->redirect(['index']);
     }
+
     
     /**
-     * 
-     * Export estacion information into PDF format.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionPdf($id) {
-        $model = $this->findModel($id);
-        $providerLectura = new \yii\data\ArrayDataProvider([
-            'allModels' => $model->lecturas,
-        ]);
-
-        $content = $this->renderAjax('_pdf', [
-            'model' => $model,
-            'providerLectura' => $providerLectura,
-        ]);
-
-        $pdf = new \kartik\mpdf\Pdf([
-            'mode' => \kartik\mpdf\Pdf::MODE_CORE,
-            'format' => \kartik\mpdf\Pdf::FORMAT_A4,
-            'orientation' => \kartik\mpdf\Pdf::ORIENT_PORTRAIT,
-            'destination' => \kartik\mpdf\Pdf::DEST_BROWSER,
-            'content' => $content,
-            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-            'cssInline' => '.kv-heading-1{font-size:18px}',
-            'options' => ['title' => \Yii::$app->name],
-            'methods' => [
-                'SetHeader' => [\Yii::$app->name],
-                'SetFooter' => ['{PAGENO}'],
-            ]
-        ]);
-
-        return $pdf->render();
-    }
-
-    /**
-    * Creates a new estacion model by another data,
-    * so user don't need to input all field from scratch.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    *
-    * @param mixed $id
-    * @return mixed
-    */
-    public function actionSaveAsNew($id) {
-        $model = new estacion();
-
-        if (Yii::$app->request->post('_asnew') != '1') {
-            $model = $this->findModel($id);
-        }
-    
-        if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('saveAsNew', [
-                'model' => $model,
-            ]);
-        }
-    }
-    
-    /**
-     * Finds the estacion model based on its primary key value.
+     * Finds the Estacion model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return estacion the loaded model
+     * @return Estacion the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = estacion::findOne($id)) !== null) {
+        if (($model = Estacion::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));

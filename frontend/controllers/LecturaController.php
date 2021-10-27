@@ -25,6 +25,13 @@ class LecturaController extends Controller
             ],
         ];
     }
+
+    public function actionMapalectura(){
+        //render actionMapalectura
+        return $this->render('mapalectura', [
+            
+        ]);
+    }
     public function actionImportar()
     {
         $estaciones = [7, 15, 21, 26, 33];

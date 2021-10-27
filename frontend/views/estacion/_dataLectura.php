@@ -15,6 +15,12 @@ use yii\data\ArrayDataProvider;
                 'label' => Yii::t('app', 'Id Variable')
             ],
         'valor',
+        'ts',
+        'temp_out',
+        'hum_out',
+        'et',
+        'solar_rad',
+        'wind_speed',
         [
             'class' => 'yii\grid\ActionColumn',
             'controller' => 'lectura'

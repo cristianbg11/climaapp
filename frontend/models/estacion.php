@@ -3,12 +3,12 @@
 namespace frontend\models;
 
 use Yii;
-use \frontend\models\base\estacion as Baseestacion;
+use \frontend\models\base\Estacion as BaseEstacion;
 
 /**
  * This is the model class for table "estacion".
  */
-class estacion extends Baseestacion
+class Estacion extends BaseEstacion
 {
     /**
      * @inheritdoc

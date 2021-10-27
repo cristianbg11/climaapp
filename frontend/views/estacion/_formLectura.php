@@ -34,6 +34,12 @@ echo TabularForm::widget([
             'columnOptions' => ['width' => '200px']
         ],
         'valor' => ['type' => TabularForm::INPUT_TEXT],
+        'ts' => ['type' => TabularForm::INPUT_TEXT],
+        'temp_out' => ['type' => TabularForm::INPUT_TEXT],
+        'hum_out' => ['type' => TabularForm::INPUT_TEXT],
+        'et' => ['type' => TabularForm::INPUT_TEXT],
+        'solar_rad' => ['type' => TabularForm::INPUT_TEXT],
+        'wind_speed' => ['type' => TabularForm::INPUT_TEXT],
         'del' => [
             'type' => 'raw',
             'label' => '',

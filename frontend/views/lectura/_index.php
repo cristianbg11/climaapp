@@ -22,7 +22,7 @@ use yii\widgets\DetailView;
     $gridColumn = [
         'id_lectura',
         'fecha',
-        'id_estaciones',
+        'id_estacion',
         'id_variable',
         'Valor',
     ];

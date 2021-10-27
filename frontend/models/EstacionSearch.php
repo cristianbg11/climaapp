@@ -5,12 +5,12 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\estacion;
+use frontend\models\Estacion;
 
 /**
- * frontend\models\estacionSearch represents the model behind the search form about `frontend\models\estacion`.
+ * frontend\models\EstacionSearch represents the model behind the search form about `frontend\models\Estacion`.
  */
- class estacionSearch extends estacion
+ class EstacionSearch extends Estacion
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ use frontend\models\estacion;
      */
     public function search($params)
     {
-        $query = estacion::find();
+        $query = Estacion::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

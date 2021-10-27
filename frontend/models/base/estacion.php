@@ -17,7 +17,7 @@ use Yii;
  *
  * @property \frontend\models\Lectura[] $lecturas
  */
-class estacion extends \yii\db\ActiveRecord
+class Estacion extends \yii\db\ActiveRecord
 {
     use \mootensai\relation\RelationTrait;
 
@@ -76,16 +76,16 @@ class estacion extends \yii\db\ActiveRecord
      */
     public function getLecturas()
     {
-        return $this->hasMany(\frontend\models\Lectura::className(), ['id_estaciones' => 'id']);
+        return $this->hasMany(\frontend\models\Lectura::className(), ['id_estacion' => 'id']);
     }
     
 
     /**
      * @inheritdoc
-     * @return \frontend\models\estacionQuery the active query used by this AR class.
+     * @return \frontend\models\EstacionQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \frontend\models\estacionQuery(get_called_class());
+        return new \frontend\models\EstacionQuery(get_called_class());
     }
 }
