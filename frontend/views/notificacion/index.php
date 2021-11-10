@@ -1,14 +1,14 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\CultivoFincaSearch */
+/* @var $searchModel frontend\models\NotificacionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
 use kartik\export\ExportMenu;
 use kartik\grid\GridView;
 
-$this->title = Yii::t('app', 'Cultivo Fincas');
+$this->title = Yii::t('app', 'Notificacions');
 $this->params['breadcrumbs'][] = $this->title;
 $search = "$('.search-button').click(function(){
 	$('.search-form').toggle(1000);
@@ -16,13 +16,13 @@ $search = "$('.search-button').click(function(){
 });";
 $this->registerJs($search);
 ?>
-<div class="cultivo-finca-index">
+<div class="notificacion-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Cultivo Finca'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Notificacion'), ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('app', 'Advance Search'), '#', ['class' => 'btn btn-info search-button']) ?>
     </p>
     <div class="search-form" style="display:none">
@@ -45,32 +45,71 @@ $this->registerJs($search);
         ],
         ['attribute' => 'id', 'visible' => false],
         [
+                'attribute' => 'id_estacion',
+                'label' => Yii::t('app', 'Id Estacion'),
+                'value' => function($model){
+                    if ($model->estacion)
+                    {return $model->estacion->Nombre;}
+                    else
+                    {return NULL;}
+                },
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Estacion::find()->asArray()->all(), 'id', 'Nombre'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => 'Estacion', 'id' => 'grid-notificacion-search-id_estacion']
+            ],
+        [
                 'attribute' => 'id_finca',
                 'label' => Yii::t('app', 'Id Finca'),
-                'value' => function($model){                   
-                    return $model->finca->Nombre;                   
+                'value' => function($model){
+                    if ($model->finca)
+                    {return $model->finca->Nombre;}
+                    else
+                    {return NULL;}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
                 'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Finca::find()->asArray()->all(), 'id', 'Nombre'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => 'Finca', 'id' => 'grid-cultivo-finca-search-id_finca']
+                'filterInputOptions' => ['placeholder' => 'Finca', 'id' => 'grid-notificacion-search-id_finca']
+            ],
+        [
+                'attribute' => 'id_prediccion',
+                'label' => Yii::t('app', 'Id Prediccion'),
+                'value' => function($model){
+                    if ($model->prediccion)
+                    {return $model->prediccion->etp;}
+                    else
+                    {return NULL;}
+                },
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Prediccionhecha::find()->asArray()->all(), 'id', 'etp'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => 'Prediccionhecha', 'id' => 'grid-notificacion-search-id_prediccion']
             ],
         [
                 'attribute' => 'id_cultivo',
                 'label' => Yii::t('app', 'Id Cultivo'),
-                'value' => function($model){                   
-                    return $model->cultivo->Cultivo;                   
+                'value' => function($model){
+                    if ($model->cultivo)
+                    {return $model->cultivo->Cultivo;}
+                    else
+                    {return NULL;}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
                 'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Cultivo::find()->asArray()->all(), 'id', 'Cultivo'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => 'Cultivo', 'id' => 'grid-cultivo-finca-search-id_cultivo']
+                'filterInputOptions' => ['placeholder' => 'Cultivo', 'id' => 'grid-notificacion-search-id_cultivo']
             ],
-        'tam_tareas',
+        'densidad',
+        'mensaje',
         [
             'class' => 'yii\grid\ActionColumn',
         ],
@@ -81,7 +120,7 @@ $this->registerJs($search);
         'filterModel' => $searchModel,
         'columns' => $gridColumn,
         'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-cultivo-finca']],
+        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-notificacion']],
         'panel' => [
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),

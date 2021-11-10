@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <h4>Variable<?= ' '. Html::encode($this->title) ?></h4>
     </div>
-    <?php 
+    <?php /*
     $gridColumnVariable = [
         ['attribute' => 'id', 'visible' => false],
         'Nombre',
@@ -98,5 +98,5 @@ $this->params['breadcrumbs'][] = $this->title;
     echo DetailView::widget([
         'model' => $model->estaciones,
         'attributes' => $gridColumnEstacion    ]);
-    ?>
+    ?>*/?>
 </div>

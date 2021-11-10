@@ -3,17 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Prediccionhecha;
 use frontend\models\Notificacion;
-use frontend\models\PrediccionhechaSearch;
+use frontend\models\NotificacionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PrediccionhechaController implements the CRUD actions for Prediccionhecha model.
+ * NotificacionController implements the CRUD actions for Notificacion model.
  */
-class PrediccionhechaController extends Controller
+class NotificacionController extends Controller
 {
     public function behaviors()
     {
@@ -28,12 +27,12 @@ class PrediccionhechaController extends Controller
     }
 
     /**
-     * Lists all Prediccionhecha models.
+     * Lists all Notificacion models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PrediccionhechaSearch();
+        $searchModel = new NotificacionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +42,7 @@ class PrediccionhechaController extends Controller
     }
 
     /**
-     * Displays a single Prediccionhecha model.
+     * Displays a single Notificacion model.
      * @param integer $id
      * @return mixed
      */
@@ -56,51 +55,15 @@ class PrediccionhechaController extends Controller
     }
 
     /**
-     * Creates a new Prediccionhecha model.
+     * Creates a new Notificacion model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Prediccionhecha();
+        $model = new Notificacion();
 
-        if ($model->loadAll(Yii::$app->request->post())) {
-
-            $ini=$model->fecha_estimada_inicial;
-            $fin=$model->fecha_estimada_final;
-           // print_r($_POST);die();
-            chdir('C:\xampp\htdocs\climaapp\frontend\views\site');
-            $command="python WDA_Forecast_FBProphet_Params.py ET 800 $ini $fin";
-           // echo $command;
-            $output = shell_exec($command);
-            $arr = explode('**progdata**', $output);
-            $output=$arr[1];
-            $predData=json_decode($output);
-            foreach($predData as $fecha=>$valor){
-                $model = new Prediccionhecha();
-                $model->etp=$valor;
-                $model->fecha_estimada_inicial=$ini;
-                $model->fecha_estimada_final=$fin;
-                $model->fecha=date('Y-m-d');
-                $model->id_estacion=33;
-                if(!$model->save()){
-                    var_dump($model->getErrors());die();
-                }else{
-                    $modeln=new Notificacion();
-                    $modeln->id_cultivo=1;
-                    $modeln->id_finca=1;
-                    $modeln->id_prediccion=$model->id;
-                    $modeln->id_estacion=33;
-                    $modeln->densidad=$valor*(0.8*200);//densidad media
-                    if(!$modeln->save()){
-                        var_dump($modeln->getErrors());die();
-                    }
-                }
-              //  $model->save();
-            }
-           // print_r($arr);
-           // die();
-           // $model->save();
+        if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -110,7 +73,7 @@ class PrediccionhechaController extends Controller
     }
 
     /**
-     * Updates an existing Prediccionhecha model.
+     * Updates an existing Notificacion model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -129,7 +92,7 @@ class PrediccionhechaController extends Controller
     }
 
     /**
-     * Deletes an existing Prediccionhecha model.
+     * Deletes an existing Notificacion model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -140,15 +103,14 @@ class PrediccionhechaController extends Controller
 
         return $this->redirect(['index']);
     }
-
+    
     /**
      * 
-     * Export Prediccionhecha information into PDF format.
+     * Export Notificacion information into PDF format.
      * @param integer $id
      * @return mixed
      */
-    public function actionPdf($id)
-    {
+    public function actionPdf($id) {
         $model = $this->findModel($id);
 
         $content = $this->renderAjax('_pdf', [
@@ -173,17 +135,17 @@ class PrediccionhechaController extends Controller
         return $pdf->render();
     }
 
-
+    
     /**
-     * Finds the Prediccionhecha model based on its primary key value.
+     * Finds the Notificacion model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Prediccionhecha the loaded model
+     * @return Notificacion the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Prediccionhecha::findOne($id)) !== null) {
+        if (($model = Notificacion::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));

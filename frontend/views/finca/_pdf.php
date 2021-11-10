@@ -29,11 +29,39 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'productor.Nombre',
                 'label' => Yii::t('app', 'Id Productor')
             ],
+        'latitud',
+        'longitud',
     ];
     echo DetailView::widget([
         'model' => $model,
         'attributes' => $gridColumn
     ]); 
+?>
+    </div>
+    
+    <div class="row">
+<?php
+if($providerCultivoFinca->totalCount){
+    $gridColumnCultivoFinca = [
+        ['class' => 'yii\grid\SerialColumn'],
+        ['attribute' => 'id', 'visible' => false],
+                [
+                'attribute' => 'cultivo.Cultivo',
+                'label' => Yii::t('app', 'Id Cultivo')
+            ],
+        'tam_tareas',
+    ];
+    echo Gridview::widget([
+        'dataProvider' => $providerCultivoFinca,
+        'panel' => [
+            'type' => GridView::TYPE_PRIMARY,
+            'heading' => Html::encode(Yii::t('app', 'Cultivo Finca')),
+        ],
+        'panelHeadingTemplate' => '<h4>{heading}</h4>{summary}',
+        'toggleData' => false,
+        'columns' => $gridColumnCultivoFinca
+    ]);
+}
 ?>
     </div>
 </div>

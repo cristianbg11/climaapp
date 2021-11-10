@@ -1,3 +1,13 @@
+<style>
+    /* Set the size of the div element that contains the map */
+#map {
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
+    </style>
+
 <?php
 
 use yii\helpers\Html;
@@ -82,10 +92,46 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model->estacion,
         'attributes' => $gridColumnEstacion    ]);
     ?>
+
+<div id="map"></div>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0gCtDVapFZQt9Z6O2WtRGPi2LnRsollc&callback=initMap&libraries=&v=weekly"
+  async
+></script>
+
+<?php
+
+use frontend\models\base\Lectura;
+
+//$estaciones=Lectura::find()->where(['fecha'=>'2021-09-12 01:00:00'])->groupBy('id_estacion')->all();
+ //print_r($estaciones);die();
+?>
+<script type="text/javascript">
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru 18.880909,-70.553474
+  const uluru = { lat: 18.880909, lng: -70.553474 };
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 8,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  <?php //foreach ($estaciones as $esta):?>
+    pos={lat:<?=$model->estacion->latitud?>,lng:<?=$model->estacion->longitud?>};
+    marker = new google.maps.Marker({
+    position: pos,
+    label: '<?= "Et:".$model->etp*24?>',
+    map: map,
+  });
+  <?php //endforeach;?>
+}
+</script>
     <div class="row">
-        <h4>User<?= ' '. Html::encode($this->title) ?></h4>
+        <h4> <?= ' '. Html::encode($this->title) ?></h4>
     </div>
-    <?php 
+    <?php /*
     $gridColumnUser = [
         ['attribute' => 'id', 'visible' => false],
         'username',
@@ -100,5 +146,5 @@ $this->params['breadcrumbs'][] = $this->title;
     echo DetailView::widget([
         'model' => $model->user,
         'attributes' => $gridColumnUser    ]);
-    ?>
+    ?>*/?>
 </div>

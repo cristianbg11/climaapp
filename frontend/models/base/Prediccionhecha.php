@@ -8,11 +8,11 @@ use Yii;
  * This is the base model class for table "prediccionhecha".
  *
  * @property integer $id
- * @property integer $temp_out
- * @property integer $hum_out
- * @property integer $solar_rad
- * @property integer $wind_speed
- * @property integer $etp
+ * @property double $temp_out
+ * @property double $hum_out
+ * @property double $solar_rad
+ * @property double $wind_speed
+ * @property double $etp
  * @property string $fecha
  * @property string $fecha_estimada_inicial
  * @property string $fecha_estimada_final
@@ -45,8 +45,9 @@ class Prediccionhecha extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['temp_out', 'hum_out', 'solar_rad', 'wind_speed', 'etp', 'id_estacion', 'id_user'], 'integer'],
-            [['fecha', 'fecha_estimada_inicial', 'fecha_estimada_final'], 'safe']
+            [['temp_out', 'hum_out', 'solar_rad', 'wind_speed', 'etp'], 'number'],
+            [['fecha', 'fecha_estimada_inicial', 'fecha_estimada_final'], 'safe'],
+            [['id_estacion', 'id_user'], 'integer']
         ];
     }
 

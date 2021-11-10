@@ -11,7 +11,10 @@ use Yii;
  * @property string $Nombre
  * @property string $Localidad
  * @property integer $id_productor
+ * @property string $latitud
+ * @property string $longitud
  *
+ * @property \frontend\models\CultivoFinca[] $cultivoFincas
  * @property \frontend\models\Productor $productor
  */
 class Finca extends \yii\db\ActiveRecord
@@ -26,6 +29,7 @@ class Finca extends \yii\db\ActiveRecord
     public function relationNames()
     {
         return [
+            'cultivoFincas',
             'productor'
         ];
     }
@@ -38,7 +42,8 @@ class Finca extends \yii\db\ActiveRecord
         return [
             [['id_productor'], 'required'],
             [['id_productor'], 'integer'],
-            [['Nombre', 'Localidad'], 'string', 'max' => 50]
+            [['Nombre', 'Localidad'], 'string', 'max' => 50],
+            [['latitud', 'longitud'], 'string', 'max' => 250]
         ];
     }
 
@@ -60,9 +65,19 @@ class Finca extends \yii\db\ActiveRecord
             'Nombre' => Yii::t('app', 'Nombre'),
             'Localidad' => Yii::t('app', 'Localidad'),
             'id_productor' => Yii::t('app', 'Id Productor'),
+            'latitud' => Yii::t('app', 'Latitud'),
+            'longitud' => Yii::t('app', 'Longitud'),
         ];
     }
     
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCultivoFincas()
+    {
+        return $this->hasMany(\frontend\models\CultivoFinca::className(), ['id_finca' => 'id']);
+    }
+        
     /**
      * @return \yii\db\ActiveQuery
      */

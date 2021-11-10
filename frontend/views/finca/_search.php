@@ -29,6 +29,10 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
+    <?= $form->field($model, 'latitud')->textInput(['maxlength' => true, 'placeholder' => 'Latitud']) ?>
+
+    <?php /* echo $form->field($model, 'longitud')->textInput(['maxlength' => true, 'placeholder' => 'Longitud']) */ ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>

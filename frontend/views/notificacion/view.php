@@ -5,17 +5,17 @@ use yii\widgets\DetailView;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\CultivoFinca */
+/* @var $model frontend\models\Notificacion */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cultivo Fincas'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Notificacions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cultivo-finca-view">
+<div class="notificacion-view">
 
     <div class="row">
         <div class="col-sm-9">
-            <h2><?= Yii::t('app', 'Cultivo Finca').' '. Html::encode($this->title) ?></h2>
+            <h2><?= Yii::t('app', 'Notificacion').' '. Html::encode($this->title) ?></h2>
         </div>
         <div class="col-sm-3" style="margin-top: 15px">
 <?=             
@@ -46,14 +46,23 @@ $this->params['breadcrumbs'][] = $this->title;
     $gridColumn = [
         ['attribute' => 'id', 'visible' => false],
         [
+            'attribute' => 'estacion.Nombre',
+            'label' => Yii::t('app', 'Id Estacion'),
+        ],
+        [
             'attribute' => 'finca.Nombre',
             'label' => Yii::t('app', 'Id Finca'),
+        ],
+        [
+            'attribute' => 'prediccion.etp',
+            'label' => Yii::t('app', 'Id Prediccion'),
         ],
         [
             'attribute' => 'cultivo.Cultivo',
             'label' => Yii::t('app', 'Id Cultivo'),
         ],
-        'tam_tareas',
+        'densidad',
+        'mensaje',
     ];
     echo DetailView::widget([
         'model' => $model,
@@ -78,6 +87,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => $gridColumnCultivo    ]);
     ?>
     <div class="row">
+        <h4>Estacion<?= ' '. Html::encode($this->title) ?></h4>
+    </div>
+    <?php 
+    $gridColumnEstacion = [
+        ['attribute' => 'id', 'visible' => false],
+        'Nombre',
+        'ciudad',
+        'latitud',
+        'longitud',
+        'Ubicacion',
+        'Zona',
+    ];
+    echo DetailView::widget([
+        'model' => $model->estacion,
+        'attributes' => $gridColumnEstacion    ]);
+    ?>
+    <div class="row">
         <h4>Finca<?= ' '. Html::encode($this->title) ?></h4>
     </div>
     <?php 
@@ -92,5 +118,29 @@ $this->params['breadcrumbs'][] = $this->title;
     echo DetailView::widget([
         'model' => $model->finca,
         'attributes' => $gridColumnFinca    ]);
+    ?>
+    <div class="row">
+        <h4>Prediccionhecha<?= ' '. Html::encode($this->title) ?></h4>
+    </div>
+    <?php 
+    $gridColumnPrediccionhecha = [
+        ['attribute' => 'id', 'visible' => false],
+        ['attribute' => 'temp_out', 'visible' => false],
+        ['attribute' => 'hum_out', 'visible' => false],
+        ['attribute' => 'solar_rad', 'visible' => false],
+        ['attribute' => 'wind_speed', 'visible' => false],
+        'etp',
+        ['attribute' => 'fecha', 'visible' => false],
+        'fecha_estimada_inicial',
+        'fecha_estimada_final',
+        [
+            'attribute' => 'estacion.Nombre',
+            'label' => Yii::t('app', 'Id Estacion'),
+        ],
+        ['attribute' => 'id_user', 'visible' => false],
+    ];
+    echo DetailView::widget([
+        'model' => $model->prediccion,
+        'attributes' => $gridColumnPrediccionhecha    ]);
     ?>
 </div>

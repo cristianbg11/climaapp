@@ -5,12 +5,12 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\Finca;
+use frontend\models\Notificacion;
 
 /**
- * frontend\models\FincaSearch represents the model behind the search form about `frontend\models\Finca`.
+ * frontend\models\NotificacionSearch represents the model behind the search form about `frontend\models\Notificacion`.
  */
- class FincaSearch extends Finca
+ class NotificacionSearch extends Notificacion
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ use frontend\models\Finca;
     public function rules()
     {
         return [
-            [['id', 'id_productor'], 'integer'],
-            [['Nombre', 'Localidad', 'latitud', 'longitud'], 'safe'],
+            [['id', 'id_estacion', 'id_finca', 'id_prediccion', 'id_cultivo', 'densidad'], 'integer'],
+            [['mensaje'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ use frontend\models\Finca;
      */
     public function search($params)
     {
-        $query = Finca::find();
+        $query = Notificacion::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,13 +57,14 @@ use frontend\models\Finca;
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_productor' => $this->id_productor,
+            'id_estacion' => $this->id_estacion,
+            'id_finca' => $this->id_finca,
+            'id_prediccion' => $this->id_prediccion,
+            'id_cultivo' => $this->id_cultivo,
+            'densidad' => $this->densidad,
         ]);
 
-        $query->andFilterWhere(['like', 'Nombre', $this->Nombre])
-            ->andFilterWhere(['like', 'Localidad', $this->Localidad])
-            ->andFilterWhere(['like', 'latitud', $this->latitud])
-            ->andFilterWhere(['like', 'longitud', $this->longitud]);
+        $query->andFilterWhere(['like', 'mensaje', $this->mensaje]);
 
         return $dataProvider;
     }

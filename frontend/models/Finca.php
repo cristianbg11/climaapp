@@ -19,7 +19,8 @@ class Finca extends BaseFinca
 	    [
             [['id_productor'], 'required'],
             [['id_productor'], 'integer'],
-            [['Nombre', 'Localidad'], 'string', 'max' => 50]
+            [['Nombre', 'Localidad'], 'string', 'max' => 50],
+            [['latitud', 'longitud'], 'string', 'max' => 250]
         ]);
     }
 	

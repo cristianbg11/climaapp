@@ -80,11 +80,7 @@ class CultivoFincaController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->request->post('_asnew') == '1') {
-            $model = new CultivoFinca();
-        }else{
-            $model = $this->findModel($id);
-        }
+        $model = $this->findModel($id);
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -139,29 +135,6 @@ class CultivoFincaController extends Controller
         return $pdf->render();
     }
 
-    /**
-    * Creates a new CultivoFinca model by another data,
-    * so user don't need to input all field from scratch.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    *
-    * @param mixed $id
-    * @return mixed
-    */
-    public function actionSaveAsNew($id) {
-        $model = new CultivoFinca();
-
-        if (Yii::$app->request->post('_asnew') != '1') {
-            $model = $this->findModel($id);
-        }
-    
-        if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('saveAsNew', [
-                'model' => $model,
-            ]);
-        }
-    }
     
     /**
      * Finds the CultivoFinca model based on its primary key value.

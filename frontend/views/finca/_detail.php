@@ -26,6 +26,8 @@ use kartik\grid\GridView;
             'attribute' => 'productor.Nombre',
             'label' => Yii::t('app', 'Id Productor'),
         ],
+        'latitud',
+        'longitud',
     ];
     echo DetailView::widget([
         'model' => $model,

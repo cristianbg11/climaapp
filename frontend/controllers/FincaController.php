@@ -46,11 +46,17 @@ class FincaController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($id,$ini=false,$fin=false)
     {
         $model = $this->findModel($id);
+        $providerCultivoFinca = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->cultivoFincas,
+        ]);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'providerCultivoFinca' => $providerCultivoFinca,
+            'ini'=>$ini,
+            'fin'=>$fin
         ]);
     }
 
@@ -80,11 +86,7 @@ class FincaController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->request->post('_asnew') == '1') {
-            $model = new Finca();
-        }else{
-            $model = $this->findModel($id);
-        }
+        $model = $this->findModel($id);
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -116,9 +118,13 @@ class FincaController extends Controller
      */
     public function actionPdf($id) {
         $model = $this->findModel($id);
+        $providerCultivoFinca = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->cultivoFincas,
+        ]);
 
         $content = $this->renderAjax('_pdf', [
             'model' => $model,
+            'providerCultivoFinca' => $providerCultivoFinca,
         ]);
 
         $pdf = new \kartik\mpdf\Pdf([
@@ -139,29 +145,6 @@ class FincaController extends Controller
         return $pdf->render();
     }
 
-    /**
-    * Creates a new Finca model by another data,
-    * so user don't need to input all field from scratch.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    *
-    * @param mixed $id
-    * @return mixed
-    */
-    public function actionSaveAsNew($id) {
-        $model = new Finca();
-
-        if (Yii::$app->request->post('_asnew') != '1') {
-            $model = $this->findModel($id);
-        }
-    
-        if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('saveAsNew', [
-                'model' => $model,
-            ]);
-        }
-    }
     
     /**
      * Finds the Finca model based on its primary key value.
@@ -174,6 +157,29 @@ class FincaController extends Controller
     {
         if (($model = Finca::findOne($id)) !== null) {
             return $model;
+        } else {
+            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+        }
+    }
+    
+    /**
+    * Action to load a tabular form grid
+    * for CultivoFinca
+    * @author Yohanes Candrajaya <moo.tensai@gmail.com>
+    * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
+    *
+    * @return mixed
+    */
+    public function actionAddCultivoFinca()
+    {
+        if (Yii::$app->request->isAjax) {
+            $row = Yii::$app->request->post('CultivoFinca');
+            if (!empty($row)) {
+                $row = array_values($row);
+            }
+            if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
+                $row[] = [];
+            return $this->renderAjax('_formCultivoFinca', ['row' => $row]);
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }

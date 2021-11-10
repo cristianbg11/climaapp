@@ -5,10 +5,10 @@ use yii\widgets\DetailView;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\CultivoFinca */
+/* @var $model frontend\models\Notificacion */
 
 ?>
-<div class="cultivo-finca-view">
+<div class="notificacion-view">
 
     <div class="row">
         <div class="col-sm-9">
@@ -21,14 +21,23 @@ use kartik\grid\GridView;
     $gridColumn = [
         ['attribute' => 'id', 'visible' => false],
         [
+            'attribute' => 'estacion.Nombre',
+            'label' => Yii::t('app', 'Id Estacion'),
+        ],
+        [
             'attribute' => 'finca.Nombre',
             'label' => Yii::t('app', 'Id Finca'),
+        ],
+        [
+            'attribute' => 'prediccion.etp',
+            'label' => Yii::t('app', 'Id Prediccion'),
         ],
         [
             'attribute' => 'cultivo.Cultivo',
             'label' => Yii::t('app', 'Id Cultivo'),
         ],
-        'tam_tareas',
+        'densidad',
+        'mensaje',
     ];
     echo DetailView::widget([
         'model' => $model,
