@@ -18,8 +18,10 @@ class Prediccionhecha extends BasePrediccionhecha
         return array_replace_recursive(parent::rules(),
 	    [
             [['temp_out', 'hum_out', 'solar_rad', 'wind_speed', 'etp'], 'number'],
-            [['fecha', 'fecha_estimada_inicial', 'fecha_estimada_final'], 'safe'],
-            [['id_estacion', 'id_user'], 'integer']
+            [['fecha', 'fecha_estimada_inicial', 'fecha_estimada_final','rain'], 'safe'],
+            [['id_estacion', 'id_user', 'idprec'], 'integer'],
+         /*   [['lock'], 'default', 'value' => '0'],
+            [['lock'], 'mootensai\components\OptimisticLockValidator']*/
         ]);
     }
 	

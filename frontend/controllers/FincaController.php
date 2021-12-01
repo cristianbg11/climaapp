@@ -2,9 +2,13 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Cultivo;
 use Yii;
 use frontend\models\Finca;
 use frontend\models\FincaSearch;
+use frontend\models\Planificacion;
+use frontend\models\Predicciong;
+use frontend\models\Prediccionhecha;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +18,7 @@ use yii\filters\VerbFilter;
  */
 class FincaController extends Controller
 {
+    public $currMod='config';
     public function behaviors()
     {
         return [
@@ -46,7 +51,7 @@ class FincaController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id,$ini=false,$fin=false)
+    public function actionView($id,$ini=false,$fin=false,$cult=0,$area=0,$idprec=0)
     {
         $model = $this->findModel($id);
         $providerCultivoFinca = new \yii\data\ArrayDataProvider([
@@ -56,7 +61,10 @@ class FincaController extends Controller
             'model' => $this->findModel($id),
             'providerCultivoFinca' => $providerCultivoFinca,
             'ini'=>$ini,
-            'fin'=>$fin
+            'fin'=>$fin,
+            'cult'=>$cult,
+            'area'=>$area,
+            'idprec'=>$idprec,
         ]);
     }
 
@@ -183,5 +191,37 @@ class FincaController extends Controller
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
+    }
+
+    public function actionPlanificar($id_cultivo, $id_finca, $id_pred,$area)
+    {
+
+        $predicion=Prediccionhecha::find()->where(['idprec'=>$id_pred])->all();
+       // var_dump($predicion);die();
+        $cult=Cultivo::findOne($id_cultivo);
+        foreach($predicion as $prec){
+            $modelp=new Planificacion();
+
+            $modelp->id_cultivo=$id_cultivo;
+            $modelp->id_finca=$id_finca;
+            $modelp->id_prediccion=$id_pred;
+            $modelp->area=$area;
+           // var_dump($prec);die();
+            $et=$prec->etp;
+            $cant_agua= (($et * 24) * $cult->Maduracion) * $area;
+            $cant_aguamedia= (($et * 24) * $cult->Media) * $area;
+            $cant_aguamaduracion= (($et * 24) * $cult->Media) * $area;
+
+            $cant_aguadesarrollo= (($et * 24) * $cult->Desarrollo) * $area;
+           
+            $modelp->et=$et;
+            $modelp->fecha=$prec->fecha;//date('Y-m-d');
+            $modelp->cant_agua=$cant_agua;
+            $modelp->aguapend_media=$cant_aguamedia;
+            $modelp->aguapend_maduracion=$cant_aguamaduracion;
+            $modelp->aguapend_desarrollo=$cant_aguadesarrollo;
+            $modelp->save();
+        }
+        return $this->redirect(['planificacion/riego']);
     }
 }

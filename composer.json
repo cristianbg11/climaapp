@@ -31,7 +31,8 @@
         "kartik-v/yii2-datecontrol": "^1.9",
         "nadar/yii-rest-client": "^1.0",
         "luyadev/luya-headless": "^2.8",
-        "deadmantfa/yii2-zoho-api-client": "v1.0.x"
+        "deadmantfa/yii2-zoho-api-client": "v1.0.x",
+        "kriss/yii2-calendar-schedule": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

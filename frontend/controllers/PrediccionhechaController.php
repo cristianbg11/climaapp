@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Prediccionhecha;
 use frontend\models\Notificacion;
+use frontend\models\Predicciong;
 use frontend\models\PrediccionhechaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -15,6 +16,7 @@ use yii\filters\VerbFilter;
  */
 class PrediccionhechaController extends Controller
 {
+    public $currMod='predicciones';
     public function behaviors()
     {
         return [
@@ -68,24 +70,58 @@ class PrediccionhechaController extends Controller
 
             $ini=$model->fecha_estimada_inicial;
             $fin=$model->fecha_estimada_final;
+
+            
+
            // print_r($_POST);die();
             chdir('C:\xampp\htdocs\climaapp\frontend\views\site');
+            
+
+            $command="python WDA_Forecast_FBProphet_Params.py Out_Hum 800 $ini $fin";
+           // echo $command;
+            $output = shell_exec($command);
+            $arr = explode('**progdata**', $output);
+            $output=$arr[1];
+            $predData=json_decode($output);
+            $humData=[];
+            foreach($predData as $fecha=>$valor){
+                $fecha = $fecha / 1000;
+                $fecha = date('Y-m-d', $fecha);
+                $humData[$fecha]=$valor;
+            }
+            
+
             $command="python WDA_Forecast_FBProphet_Params.py ET 800 $ini $fin";
            // echo $command;
             $output = shell_exec($command);
             $arr = explode('**progdata**', $output);
             $output=$arr[1];
             $predData=json_decode($output);
+            $modelprec=new Predicciong();
+            $modelprec->id_estacion=33;
+            $modelprec->fecha_ini=$ini;
+            $modelprec->fecha_fin=$fin;
+            $modelprec->fecha=date('Y-m-d');
+            if(!$modelprec->save()){
+                var_dump($modelprec->getErrors());die();
+            }
             foreach($predData as $fecha=>$valor){
                 $model = new Prediccionhecha();
+                
                 $model->etp=$valor;
+                
+
                 $model->fecha_estimada_inicial=$ini;
                 $model->fecha_estimada_final=$fin;
-                $model->fecha=date('Y-m-d');
+                $fecha = $fecha / 1000;
+                $fecha = date('Y-m-d', $fecha);
+                $model->rain=$humData[$fecha];
+                $model->fecha=$fecha;//'';//date('Y-m-d');
                 $model->id_estacion=33;
+                $model->idprec=$modelprec->id;
                 if(!$model->save()){
                     var_dump($model->getErrors());die();
-                }else{
+                }/*else{
                     $modeln=new Notificacion();
                     $modeln->id_cultivo=1;
                     $modeln->id_finca=1;
@@ -95,7 +131,7 @@ class PrediccionhechaController extends Controller
                     if(!$modeln->save()){
                         var_dump($modeln->getErrors());die();
                     }
-                }
+                }*/
               //  $model->save();
             }
            // print_r($arr);

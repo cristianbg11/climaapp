@@ -23,6 +23,8 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
+    public $currMod='visualizacion';
+
     public function behaviors()
     {
         return [
@@ -82,6 +84,14 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+    public function actionConfig(){
+        $this->currMod='config';
+        return $this->render('index');
+    }
+    public function actionPredicciones(){
+        $this->currMod='predicciones';
+        return $this->render('index');
+    }
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {

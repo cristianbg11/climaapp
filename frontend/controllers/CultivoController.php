@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class CultivoController extends Controller
 {
+    public $currMod='config';
     public function behaviors()
     {
         return [

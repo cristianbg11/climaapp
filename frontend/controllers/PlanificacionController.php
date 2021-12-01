@@ -3,18 +3,18 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Estacion;
-use frontend\models\EstacionSearch;
+use frontend\models\Planificacion;
+use frontend\models\PlanificacionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EstacionController implements the CRUD actions for Estacion model.
+ * PlanificacionController implements the CRUD actions for Planificacion model.
  */
-class EstacionController extends Controller
+class PlanificacionController extends Controller
 {
-    public $currMod='config';
+    public $currMod = 'predicciones';
     public function behaviors()
     {
         return [
@@ -26,14 +26,24 @@ class EstacionController extends Controller
             ],
         ];
     }
+    public function actionRiego()
+    {
+        $this->currMod = 'visualizacion';
+        $planifs = Planificacion::find()->all();
+
+        return $this->render('riego', [
+            'planifs' => $planifs,
+
+        ]);
+    }
 
     /**
-     * Lists all Estacion models.
+     * Lists all Planificacion models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new EstacionSearch();
+        $searchModel = new PlanificacionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,30 +53,26 @@ class EstacionController extends Controller
     }
 
     /**
-     * Displays a single Estacion model.
+     * Displays a single Planificacion model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $providerLectura = new \yii\data\ArrayDataProvider([
-            'allModels' => $model->lecturas,
-        ]);
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'providerLectura' => $providerLectura,
         ]);
     }
 
     /**
-     * Creates a new Estacion model.
+     * Creates a new Planificacion model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Estacion();
+        $model = new Planificacion();
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -78,7 +84,7 @@ class EstacionController extends Controller
     }
 
     /**
-     * Updates an existing Estacion model.
+     * Updates an existing Planificacion model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -97,7 +103,7 @@ class EstacionController extends Controller
     }
 
     /**
-     * Deletes an existing Estacion model.
+     * Deletes an existing Planificacion model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -109,41 +115,18 @@ class EstacionController extends Controller
         return $this->redirect(['index']);
     }
 
-    
+
     /**
-     * Finds the Estacion model based on its primary key value.
+     * Finds the Planificacion model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Estacion the loaded model
+     * @return Planificacion the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Estacion::findOne($id)) !== null) {
+        if (($model = Planificacion::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
-        }
-    }
-    
-    /**
-    * Action to load a tabular form grid
-    * for Lectura
-    * @author Yohanes Candrajaya <moo.tensai@gmail.com>
-    * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
-    *
-    * @return mixed
-    */
-    public function actionAddLectura()
-    {
-        if (Yii::$app->request->isAjax) {
-            $row = Yii::$app->request->post('Lectura');
-            if (!empty($row)) {
-                $row = array_values($row);
-            }
-            if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
-                $row[] = [];
-            return $this->renderAjax('_formLectura', ['row' => $row]);
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }

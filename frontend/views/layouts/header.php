@@ -3,8 +3,38 @@ use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+$modMenu=[
+    [
+        'url'=>['site/index'],
+        'module'=>'visualizacion',
+        'label'=>'Visualicaci&oacute;n Data'        
+    ],
+    [
+        'url'=>['site/predicciones'],
+        'label'=>'Predicciones',
+        'module'=>'predicciones'      
+    ],
+    [
+        'url'=>['site/config'],
+        'label'=>'Configuracion',
+        'module'=>'config'        
+    ],
+];
 ?>
+<style>
 
+.mod-menu{
+    color:white;
+    font-size: 14px;
+    float:left;
+    padding:15px 15px;
+}
+.mod-menu:hover,.mod-menu-active{
+    font-weight: bold;
+    background-color: #68bbc4;
+    color:white;
+}
+</style>
 <header class="main-header">
 
     <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . 'climaapp' . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
@@ -14,7 +44,13 @@ use yii\helpers\Html;
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
+        
+        <?php foreach($modMenu as $item):?>
 
+            <?=Html::a($item['label'],$item['url'],['class'=>isset($this->context->currMod)&&$this->context->currMod==$item['module']?'mod-menu mod-menu-active':'mod-menu']);?>
+
+        <?php endforeach;?>         
+         
         <div class="navbar-custom-menu">
 
             <ul class="nav navbar-nav">

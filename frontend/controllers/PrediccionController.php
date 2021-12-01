@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class PrediccionController extends Controller
 {
+    public $currMod='predicciones';
     public function behaviors()
     {
         return [

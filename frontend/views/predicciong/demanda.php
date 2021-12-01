@@ -1,14 +1,15 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\PrediccionhechaSearch */
+/* @var $searchModel frontend\models\PredicciongSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+use frontend\models\Prediccionhecha;
 use yii\helpers\Html;
 use kartik\export\ExportMenu;
 use kartik\grid\GridView;
 
-$this->title = Yii::t('app', 'Predicciones');
+$this->title = Yii::t('app', 'Demanda por etapa de cultivo');
 $this->params['breadcrumbs'][] = $this->title;
 $search = "$('.search-button').click(function(){
 	$('.search-form').toggle(1000);
@@ -16,17 +17,10 @@ $search = "$('.search-button').click(function(){
 });";
 $this->registerJs($search);
 ?>
-<div class="prediccionhecha-index">
+<div class="predicciong-index">
 
-    
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Generar Prediccion'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <div class="search-form" style="display:none">
-        <?=  $this->render('_search', ['model' => $searchModel]); ?>
-    </div>
     <?php 
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
@@ -43,33 +37,43 @@ $this->registerJs($search);
             'expandOneOnly' => true
         ],
         ['attribute' => 'id', 'visible' => false],
-        ['attribute' => 'temp_out', 'visible' => false],
-        ['attribute' => 'hum_out', 'visible' => false],
-        ['attribute' => 'solar_rad', 'visible' => false],
-        ['attribute' => 'wind_speed', 'visible' => false],
-        ['attribute' => 'etp', 'visible' => false],
-        ['attribute' => 'fecha', 'visible' => false],
-        'fecha_estimada_inicial',
-        'fecha_estimada_final',
+        'fecha_ini',
+        'fecha_fin',
+        'fecha',
         [
                 'attribute' => 'id_estacion',
                 'label' => Yii::t('app', 'Id Estacion'),
-                'value' => function($model){
-                    if ($model->estacion)
-                    {return $model->estacion->Nombre;}
-                    else
-                    {return NULL;}
+                'value' => function($model){                   
+                    return $model->estacion->Nombre;                   
                 },
                 'filterType' => GridView::FILTER_SELECT2,
                 'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\Estacion::find()->asArray()->all(), 'id', 'Nombre'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => 'Estacion', 'id' => 'grid-prediccionhecha-search-id_estacion']
+                'filterInputOptions' => ['placeholder' => 'Estacion', 'id' => 'grid-predicciong-search-id_estacion']
             ],
-        ['attribute' => 'id_user', 'visible' => false],
+        /*[
+                'attribute' => 'id_user',
+                'label' => Yii::t('app', 'Id User'),
+                'value' => function($model){                   
+                    return $model->user->username;                   
+                },
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => \yii\helpers\ArrayHelper::map(\frontend\models\User::find()->asArray()->all(), 'id', 'username'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => 'User', 'id' => 'grid-predicciong-search-id_user']
+            ],*/
         [
             'class' => 'yii\grid\ActionColumn',
+            'template'=>'{verdem}',
+            'buttons'=>[
+                'verdem'=>function($url,$model,$key){
+                    return Html::a('<i class="fa fa-eye"></i>',['predicciong/viewdemanda','id'=>$model->id]);
+                }
+            ]
         ],
     ]; 
     ?>
@@ -78,11 +82,12 @@ $this->registerJs($search);
         'filterModel' => $searchModel,
         'columns' => $gridColumn,
         'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-prediccionhecha']],
+        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-predicciong']],
         'panel' => [
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
         ],
+        'export' => false,
         // your toolbar can include the additional full export menu
         'toolbar' => [
             '{export}',
@@ -98,6 +103,9 @@ $this->registerJs($search);
                         '<li class="dropdown-header">Export All Data</li>',
                     ],
                 ],
+                'exportConfig' => [
+                    ExportMenu::FORMAT_PDF => false
+                ]
             ]) ,
         ],
     ]); ?>

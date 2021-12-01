@@ -5,12 +5,12 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\Prediccionhecha;
+use frontend\models\Predicciong;
 
 /**
- * frontend\models\PrediccionhechaSearch represents the model behind the search form about `frontend\models\Prediccionhecha`.
+ * frontend\models\PredicciongSearch represents the model behind the search form about `frontend\models\Predicciong`.
  */
- class PrediccionhechaSearch extends Prediccionhecha
+ class PredicciongSearch extends Predicciong
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ use frontend\models\Prediccionhecha;
     public function rules()
     {
         return [
-            [['id', 'temp_out', 'hum_out', 'solar_rad', 'wind_speed', 'etp', 'id_estacion', 'id_user','idprec'], 'integer'],
-            [['fecha', 'fecha_estimada_inicial', 'fecha_estimada_final'], 'safe'],
+            [['id', 'id_estacion', 'id_user'], 'integer'],
+            [['fecha_ini', 'fecha_fin', 'fecha'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ use frontend\models\Prediccionhecha;
      */
     public function search($params)
     {
-        $query = Prediccionhecha::find();
+        $query = Predicciong::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,17 +57,11 @@ use frontend\models\Prediccionhecha;
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'temp_out' => $this->temp_out,
-            'hum_out' => $this->hum_out,
-            'solar_rad' => $this->solar_rad,
-            'wind_speed' => $this->wind_speed,
-            'etp' => $this->etp,
+            'fecha_ini' => $this->fecha_ini,
+            'fecha_fin' => $this->fecha_fin,
             'fecha' => $this->fecha,
-            'fecha_estimada_inicial' => $this->fecha_estimada_inicial,
-            'fecha_estimada_final' => $this->fecha_estimada_final,
             'id_estacion' => $this->id_estacion,
             'id_user' => $this->id_user,
-            'idprec'=>$this->idprec,
         ]);
 
         return $dataProvider;

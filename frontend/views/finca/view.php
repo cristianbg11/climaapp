@@ -1,12 +1,14 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 use kartik\grid\GridView;
 use frontend\models\Prediccion;
 use frontend\models\Cultivo;
 use yii\widgets\ActiveForm;
 use dosamigos\chartjs\ChartJs;
+use frontend\models\base\CultivoFinca;
 use frontend\models\DetPrediccion;
 
 /* @var $this yii\web\View */
@@ -34,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title' => Yii::t('app', 'Will open the generated PDF file in a new window')
                 ]
             ) ?>
-
+<?php /*
             <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
@@ -42,13 +44,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                     'method' => 'post',
                 ],
-            ])
+            ])*/
             ?>
         </div>
     </div>
 
     <div class="row">
-        <?php
+        <?php /*
         $gridColumn = [
             ['attribute' => 'id', 'visible' => false],
             'Nombre',
@@ -64,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
         echo DetailView::widget([
             'model' => $model,
             'attributes' => $gridColumn
-        ]);
+        ]);*/
         ?>
     </div>
 
@@ -181,30 +183,52 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <hr />
+<b>Seleccionar Cultivos a planificar</b><br>
+<?php
+    $cultivos_finca =CultivoFinca::find()->where(['id_finca'=>$model->id])->all();?>
+    
+    <?php //var_dump($cultivos_finca);die();?>
+    <?php foreach  ($cultivos_finca as $cultivon):?>
+    <a href="<?=Url::to(['finca/planificar','id_cultivo'=>$cultivon->cultivo->id,'id_finca'=>$model->id,'id_pred'=>$idprec,'area'=>$cultivon->tam_tareas]);?>"
+    <?php /*<?=Url::to(['view','id'=>$model->id,'cult'=>$cultivon->cultivo->id,'area'=>$cultivon->tam_tareas])?>*/?>
+     onclick=""><?php echo $cultivon->cultivo->Cultivo?><img src="<?=$cultivon->cultivo->Cultivo.'.jpg'?>" style="width:50px;height:60px;">
+
+<?php endforeach?>
 
 <?php $form = ActiveForm::begin(['options' => ['onsubmit' => 'enviarForm()'], 'method' => 'get', 'action' => ['view', 'id' => $model->id]]); ?>
-<?= yii\jui\DatePicker::widget(['name' => 'ini', 'dateFormat' => 'php:Y-m-d']) ?>
+<?php /*<?= yii\jui\DatePicker::widget(['name' => 'ini', 'dateFormat' => 'php:Y-m-d']) ?>
 
 <?= yii\jui\DatePicker::widget(['name' => 'fin', 'dateFormat' => 'php:Y-m-d']) ?>
-<?php $area = 100; ?>
-<label class="btn btn info">Area en Metro2: <?= $area; ?></label>
-<span id="subBut"><input type="submit" value="Calcular" /></span>
+<?php /*
+<a href="<?=Url::to(['finca/planificar','id_cultivo'=>$id,'id_finca'=>$model->id,'id_pred'=>$idprec]);?>>Planificar</a>
+*/?>
+<?php /*
+<span id="subBut"><input type="submit" value="Planificar" /></span>*/?>
 <?php ActiveForm::end(); ?>
 <?php
 
 
-if ($ini != false && $fin != false) {
+//if ($ini != false && $fin != false) {
+if ($cult>0) {
+    $fini=new DateTime();
+    $fini->add(new DateInterval('P1D'));
+    $ini=$fini->format('Y-m-d');
+   
+    $fin= $fini->add(new DateInterval('P9D'))->format('Y-m-d');
     //echo "<h3>Prediccion de $ini a $fin</h3>";
-    $modelCult = Cultivo::findOne(1); //Maiz cultivo
+    $modelCult = Cultivo::findOne($cult); //Maiz cultivo
+    echo "<h2>".$modelCult->Cultivo."</h2>";
+    echo '<label class="btn btn info">Area en Metro2: '. $area.'</label>';
     $cache = Yii::$app->cache;
-    $output =     $cache->get('ET_data');
+
+    $output =     $cache->get("ET_data-$ini-$fin");
 
     if ($output === false) {
         chdir('C:\xampp\htdocs\climaapp\frontend\views\site');
         $command = "python WDA_Forecast_FBProphet_Params.py ET 800 $ini $fin";
 
         $output = shell_exec($command);
-        $cache->set('ET_data', $output);
+        $cache->set("ET_data-$ini-$fin", $output);
     }
     $arr = explode('**progdata**', $output);
     $arrfecha = [];
@@ -253,7 +277,7 @@ if ($ini != false && $fin != false) {
                 var_dump($modeldet->getErrors());
                 die();
             } */
-            echo date('Y-m-d', $fecha) . " : $valor <br>";
+           // echo date('Y-m-d', $fecha) . " : $valor <br>";
         }
 
         $arrvalrHum = []; //para coeficiente en desarrollo
@@ -264,12 +288,12 @@ if ($ini != false && $fin != false) {
         $arr_densidadmediaHum = []; //para coeficiente en duracion media
         $arr_densidadmaduracionHum = []; //para coeficiente en durac
 
-        $output =  $cache->get('Hum_data');
+        $output =  $cache->get("Hum_data-$ini-$fin");
 
         if ($output === false) {
             $command = "python WDA_Forecast_FBProphet_Params.py Out_Hum 800 $ini $fin";
             $output = shell_exec($command);
-            $cache->set('Hum_data', $output);
+            $cache->set("Hum_data-$ini-$fin", $output);
         }
         $arr = explode('**progdata**', $output);
 
@@ -481,7 +505,10 @@ var_dump($modelpred->save());die();
 }*/
 ?>
 
+
+
 </div>
+
 <script type="text/javascript">
     function enviarForm() {
 
