@@ -1,0 +1,11 @@
+python Forecast_Weather_Data_13nov_Params_Train.py 15 temp_out 250 2021-12-09 2021-12-13
+python Forecast_Weather_Data_13nov_Params_Train.py 15 et rain_day_mm 2021-12-09 2021-12-13
+python Forecast_Weather_Data_13nov_Params_Train.py 21 et 250 2021-12-09 2021-12-13
+python Forecast_Weather_Data_13nov_Params_Train.py 21 temp_out 250 2021-12-09 2021-12-13
+python Forecast_Weather_Data_13nov_Params_Train.py 21 et rain_day_mm 2021-12-09 2021-12-13
+python Forecast_Weather_Data_13nov_Params_Train.py 26 et 250 2021-12-09 2021-12-13
+python Forecast_Weather_Data_13nov_Params_Train.py 26 temp_out 250 2021-12-09 2021-12-13
+python Forecast_Weather_Data_13nov_Params_Train.py 26 et rain_day_mm 2021-12-09 2021-12-13
+python Forecast_Weather_Data_13nov_Params_Train.py 33 et 250 2021-12-09 2021-12-13
+python Forecast_Weather_Data_13nov_Params_Train.py 33 temp_out 250 2021-12-09 2021-12-13
+python Forecast_Weather_Data_13nov_Params_Train.py 33 et rain_day_mm 2021-12-09 2021-12-13

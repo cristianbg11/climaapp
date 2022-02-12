@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'fecha',
         [
                 'attribute' => 'estaciones.id',
-                'label' => Yii::t('app', 'Id Estaciones')
+                'label' => Yii::t('app', 'Estaciones')
             ],
         [
                 'attribute' => 'variable.id',

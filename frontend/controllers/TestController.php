@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
@@ -9,6 +9,7 @@ use yii\web\Response;
 
 class TestController extends Controller {
     public $mod='config';
+    public $currMod='visualizacion';
     function callRest($url, $token, $ispost = false, $payload = null) {
 
 
@@ -83,12 +84,13 @@ class TestController extends Controller {
         ];
         $cache = Yii::$app->cache;
         $data = $cache->get('allStations');
-        if ($ret === false) {
+        if ($data === false) {
             $data = $this->callRest('https://climared.com/api/v1/stations', '16|n3qux5QoKUpY5EdkUo94WL11z2itHIZLFqyN9btu');
             $cache->set('allStations', $data,300);
         }
+        //echo $data;die();
         $data = json_decode($data);
-//      
+//      $data[]
 //$ret=callRest('https://climared.com/api/v1/tokens/create','6|kl9Sjicb87UP1app9BKx62aqPRcwA10eHHauNmcN',true, json_encode($payload));
          return $this->render('api',['data'=>$data]);
     }

@@ -22,8 +22,7 @@ $this->registerJs($search);
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Lectura'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Advance Search'), '#', ['class' => 'btn btn-info search-button']) ?>
+        <?= Html::a(Yii::t('app', 'Crear Lectura'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <div class="search-form" style="display:none">
         <?=  $this->render('_search', ['model' => $searchModel]); ?>
@@ -47,7 +46,7 @@ $this->registerJs($search);
         'fecha',
         /*[
                 'attribute' => 'id_estaciones',
-                'label' => Yii::t('app', 'Id Estaciones'),
+                'label' => Yii::t('app', 'Estaciones'),
                 'value' => function($model){
                     if ($model->estaciones)
                     {return $model->estaciones->id;}

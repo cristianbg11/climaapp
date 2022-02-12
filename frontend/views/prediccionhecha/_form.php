@@ -59,7 +59,7 @@ use frontend\models\DetPrediccion;
     ]); ?>
 
     <?= $form->field($model, 'id_estacion')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\frontend\models\Estacion::find()->orderBy('id')->asArray()->all(), 'id', 'Nombre'),
+        'data' => \yii\helpers\ArrayHelper::map(\frontend\models\Estacion::find()->where(['id'=>[7,15,21,26,33]])->orderBy('id')->asArray()->all(), 'id', 'Nombre'),
         'options' => ['placeholder' => Yii::t('app', 'Choose Estacion')],
         'pluginOptions' => [
             'allowClear' => true
@@ -69,7 +69,7 @@ use frontend\models\DetPrediccion;
     <?= $form->field($model, 'id_user', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Crear') : Yii::t('app', 'Editar'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Cancel'), Yii::$app->request->referrer , ['class'=> 'btn btn-danger']) ?>
     </div>
 

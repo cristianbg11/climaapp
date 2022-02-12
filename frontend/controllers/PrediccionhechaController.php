@@ -64,41 +64,60 @@ class PrediccionhechaController extends Controller
      */
     public function actionCreate()
     {
+       // echo \Yii::getAlias('@app/views/site');die();
         $model = new Prediccionhecha();
-
+        $command='';
         if ($model->loadAll(Yii::$app->request->post())) {
 
             $ini=$model->fecha_estimada_inicial;
             $fin=$model->fecha_estimada_final;
-
-            
-
+            $idesta=$model->id_estacion;
+            $output1='';
+            $output2='';
+            $output3='';
+            try{
            // print_r($_POST);die();
-            chdir('C:\xampp\htdocs\climaapp\frontend\views\site');
-            
+            chdir(\Yii::getAlias('@app/views/site'));
+            $rainData=[];
+            $tempData=[];
 
-            $command="python WDA_Forecast_FBProphet_Params.py Out_Hum 800 $ini $fin";
+
+            $command="python Forecast_Weather_Data_13nov_Params_Pre.py 7 rain_day_mm 250 $ini $fin";
            // echo $command;
-            $output = shell_exec($command);
-            $arr = explode('**progdata**', $output);
+            $output1 = shell_exec($command);
+            //print_r($output1);die();
+            $arr = explode('**progdata**', $output1);
             $output=$arr[1];
             $predData=json_decode($output);
-            $humData=[];
+            
             foreach($predData as $fecha=>$valor){
                 $fecha = $fecha / 1000;
                 $fecha = date('Y-m-d', $fecha);
-                $humData[$fecha]=$valor;
+                $rainData[$fecha]=$valor;
             }
             
 
-            $command="python WDA_Forecast_FBProphet_Params.py ET 800 $ini $fin";
+            /**$command="python Forecast_Weather_Data_13nov_Params.py 7 temp_out 250 $ini $fin";
            // echo $command;
-            $output = shell_exec($command);
-            $arr = explode('**progdata**', $output);
+            $output2 = shell_exec($command);
+            $arr = explode('**progdata**', $output2);
+            $output=$arr[1];
+            $predData=json_decode($output);
+             
+            foreach($predData as $fecha=>$valor){
+                $fecha = $fecha / 1000;
+                $fecha = date('Y-m-d', $fecha);
+                $tempData[$fecha]=$valor;
+            }*/
+
+            $command="python3 Forecast_Weather_Data_13nov_Params_Pre.py $idesta et 250 $ini $fin";
+           // echo $command;
+            $output3 = shell_exec($command);
+            $arr = explode('**progdata**', $output3);
             $output=$arr[1];
             $predData=json_decode($output);
             $modelprec=new Predicciong();
-            $modelprec->id_estacion=33;
+            $modelprec->id_estacion=$idesta;
             $modelprec->fecha_ini=$ini;
             $modelprec->fecha_fin=$fin;
             $modelprec->fecha=date('Y-m-d');
@@ -108,16 +127,19 @@ class PrediccionhechaController extends Controller
             foreach($predData as $fecha=>$valor){
                 $model = new Prediccionhecha();
                 
+                $fecha = $fecha / 1000;
+                $fecha = date('Y-m-d', $fecha);
+
                 $model->etp=$valor;
-                
+                $model->rain=$rainData[$fecha];
+               // $model->temp_out=$tempData[$fecha];
 
                 $model->fecha_estimada_inicial=$ini;
                 $model->fecha_estimada_final=$fin;
-                $fecha = $fecha / 1000;
-                $fecha = date('Y-m-d', $fecha);
-                $model->rain=$humData[$fecha];
+                
+                
                 $model->fecha=$fecha;//'';//date('Y-m-d');
-                $model->id_estacion=33;
+                $model->id_estacion=$idesta;
                 $model->idprec=$modelprec->id;
                 if(!$model->save()){
                     var_dump($model->getErrors());die();
@@ -134,10 +156,103 @@ class PrediccionhechaController extends Controller
                 }*/
               //  $model->save();
             }
+        }catch(\Exception $ex){
+            echo "<h2>Error</h2>Command= $command<br /><pre>";
+            echo "\n $output1 \n $output2 \n $output3\n";
+            echo $ex->getMessage();
+            echo $ex->getTraceAsString();
+            echo '</pre>';
+            die();
+        }
            // print_r($arr);
            // die();
            // $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['predicciong/view', 'id' => $modelprec->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Creates a new Prediccionhecha model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateTemp()
+    {
+        
+        $model = new Prediccionhecha();
+
+        if ($model->loadAll(Yii::$app->request->post())) {
+
+            $ini=$model->fecha_estimada_inicial;
+            $fin=$model->fecha_estimada_final;
+            $idesta=$model->id_estacion;
+            $output1='';
+            $output2='';
+            $output3='';
+            try{
+           // print_r($_POST);die();
+            chdir(\Yii::getAlias('@app/views/site'));
+            $rainData=[];
+            $tempData=[];
+
+            $command="python Forecast_Weather_Data_13nov_Params_Pre.py $idesta temp_out 250 $ini $fin";
+           // echo $command;
+            $output3 = shell_exec($command);
+            $arr = explode('**progdata**', $output3);
+            $output=$arr[1];
+            $predData=json_decode($output);
+
+            $modelprec=new Predicciong();
+            $modelprec->id_estacion=$idesta;
+            $modelprec->fecha_ini=$ini;
+            $modelprec->fecha_fin=$fin;
+            $modelprec->fecha=date('Y-m-d');
+            if(!$modelprec->save()){
+                var_dump($modelprec->getErrors());die();
+            }
+
+            $tempData=[];
+            foreach($predData as $fecha=>$valor){
+                $fecha = $fecha / 1000;
+                $fecha = date('Y-m-d', $fecha);
+                $tempData[$fecha]=$valor;
+            }
+
+            foreach($tempData as $fecha=>$valor){
+                $model = new Prediccionhecha();
+                
+                //$fecha = $fecha / 1000;
+               // $fecha = date('Y-m-d', $fecha);
+                
+                //$model->etp=$valor;
+              //  $model->rain=$rainData[$fecha];
+                $model->temp_out=$tempData[$fecha];
+
+                $model->fecha_estimada_inicial=$ini;
+                $model->fecha_estimada_final=$fin;
+                
+                
+                $model->fecha=$fecha;//'';//date('Y-m-d');
+                $model->id_estacion=$idesta;
+                $model->idprec=$modelprec->id;
+                if(!$model->save()){
+                    var_dump($model->getErrors());die();
+                }
+            }
+        }catch(\Exception $ex){
+            echo '<h2>Error</h2><pre>';
+            echo "\n $output1 \n $output2 \n $output3\n";
+            echo $ex->getMessage();
+            echo $ex->getTraceAsString();
+            echo '</pre>';
+            die();
+        }
+           
+            return $this->redirect(['predicciong/viewalerta', 'id' => $modelprec->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

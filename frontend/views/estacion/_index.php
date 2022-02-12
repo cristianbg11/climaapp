@@ -22,7 +22,7 @@ use yii\widgets\DetailView;
     $gridColumn = [
         [
             'attribute' => 'estacion.id_lectura',
-            'label' => Yii::t('app', 'Id Estacion'),
+            'label' => Yii::t('app', 'Estacion'),
         ],
         'Nombre',
         'Ubicacion',

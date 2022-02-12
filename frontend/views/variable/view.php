@@ -53,7 +53,7 @@ if($providerLectura->totalCount){
             'fecha',
             [
                 'attribute' => 'estaciones.id',
-                'label' => Yii::t('app', 'Id Estaciones')
+                'label' => Yii::t('app', 'Estaciones')
             ],
                         'valor',
     ];

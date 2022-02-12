@@ -63,6 +63,18 @@ class PredicciongController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    public function actionAlerta()
+    {
+        $this->currMod='visualizacion';
+        $searchModel = new PredicciongSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('alerta', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
     /**
      * Displays a single Predicciong model.
      * @param integer $id
@@ -82,6 +94,7 @@ class PredicciongController extends Controller
 
     public function actionViewdemanda($id)
     {
+        $this->currMod='visualizacion';
         $model = $this->findModel($id);
         $providerPrediccionhecha = new \yii\data\ArrayDataProvider([
             'allModels' => $model->prediccionhechas,
@@ -98,6 +111,19 @@ class PredicciongController extends Controller
             'allModels' => $model->prediccionhechas,
         ]);
         return $this->render('viewetp', [
+            'model' => $this->findModel($id),
+            'providerPrediccionhecha' => $providerPrediccionhecha,
+        ]);
+    }
+
+    public function actionViewalerta($id)
+    {
+        $this->currMod='visualizacion';
+        $model = $this->findModel($id);
+        $providerPrediccionhecha = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->prediccionhechas,
+        ]);
+        return $this->render('viewalerta', [
             'model' => $this->findModel($id),
             'providerPrediccionhecha' => $providerPrediccionhecha,
         ]);

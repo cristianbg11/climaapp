@@ -17,6 +17,7 @@ $search = "$('.search-button').click(function(){
 });";
 $this->registerJs($search);
 ?>
+<h1>Demanda de agua necesaria por etapa del cultivo</h1>
 <div class="predicciong-index">
 
 <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -42,7 +43,7 @@ $this->registerJs($search);
         'fecha',
         [
                 'attribute' => 'id_estacion',
-                'label' => Yii::t('app', 'Id Estacion'),
+                'label' => Yii::t('app', 'Estacion'),
                 'value' => function($model){                   
                     return $model->estacion->Nombre;                   
                 },

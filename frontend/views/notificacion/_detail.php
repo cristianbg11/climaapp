@@ -22,7 +22,7 @@ use kartik\grid\GridView;
         ['attribute' => 'id', 'visible' => false],
         [
             'attribute' => 'estacion.Nombre',
-            'label' => Yii::t('app', 'Id Estacion'),
+            'label' => Yii::t('app', 'Estacion'),
         ],
         [
             'attribute' => 'finca.Nombre',

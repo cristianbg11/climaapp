@@ -25,7 +25,7 @@ use kartik\grid\GridView;
         'fecha',
         [
             'attribute' => 'estacion.Nombre',
-            'label' => Yii::t('app', 'Id Estacion'),
+            'label' => Yii::t('app', 'Estacion'),
         ],
         [
             'attribute' => 'user.username',

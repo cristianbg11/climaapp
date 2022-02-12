@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ['attribute' => 'id', 'visible' => false],
         [
             'attribute' => 'estacion.Nombre',
-            'label' => Yii::t('app', 'Id Estacion'),
+            'label' => Yii::t('app', 'Estacion'),
         ],
         [
             'attribute' => 'finca.Nombre',
@@ -135,7 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'fecha_estimada_final',
         [
             'attribute' => 'estacion.Nombre',
-            'label' => Yii::t('app', 'Id Estacion'),
+            'label' => Yii::t('app', 'Estacion'),
         ],
         ['attribute' => 'id_user', 'visible' => false],
     ];

@@ -22,7 +22,7 @@ use kartik\grid\GridView;
         $gridColumn = [
             [
             'attribute' => 'estacion.id_lectura',
-            'label' => 'Id Estacion',
+            'label' => 'Estacion',
         ],
             'Nombre',
             'Ubicacion',

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Prediccion */
 
-$this->title = Yii::t('app', 'Create Prediccion');
+$this->title = Yii::t('app', 'Crear Prediccion');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Prediccion'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

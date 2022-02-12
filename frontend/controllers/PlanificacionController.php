@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Planificacion;
+use frontend\models\PlanificacionGen;
 use frontend\models\PlanificacionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -26,13 +27,21 @@ class PlanificacionController extends Controller
             ],
         ];
     }
-    public function actionRiego()
+    public function actionRiegoDemanda($planid,$demanda)
+    {
+        $plandet=Planificacion::findOne($planid);
+        $plandet->agua_total=$plandet->agua_total+$demanda;
+        $plandet->save();
+        return $this->redirect(['view','id'=>$planid]);
+    }
+    public function actionRiego($id,$etapa='ini')
     {
         $this->currMod = 'visualizacion';
+        $plangen=PlanificacionGen::findOne($id);
         $planifs = Planificacion::find()->all();
 
         return $this->render('riego', [
-            'planifs' => $planifs,
+            'planifs' => $planifs,'plangen'=>$plangen,'etapa'=>$etapa
 
         ]);
     }
@@ -43,6 +52,7 @@ class PlanificacionController extends Controller
      */
     public function actionIndex()
     {
+        $this->currMod = 'visualizacion';
         $searchModel = new PlanificacionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

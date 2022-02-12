@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Notificacion */
 
-$this->title = Yii::t('app', 'Create Notificacion');
+$this->title = Yii::t('app', 'Crear Notificacion');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Notificacions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

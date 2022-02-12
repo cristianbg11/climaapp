@@ -53,7 +53,7 @@ $this->registerJs($search);
         'fecha_estimada_final',
         [
                 'attribute' => 'id_estacion',
-                'label' => Yii::t('app', 'Id Estacion'),
+                'label' => Yii::t('app', 'Estacion'),
                 'value' => function($model){
                     if ($model->estacion)
                     {return $model->estacion->Nombre;}

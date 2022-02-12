@@ -42,12 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'fecha',
         [
             'attribute' => 'estacion.Nombre',
-            'label' => Yii::t('app', 'Id Estacion'),
+            'label' => Yii::t('app', 'Estacion'),
         ],
+        /*
         [
             'attribute' => 'user.username',
             'label' => Yii::t('app', 'Id User'),
         ],
+        */
     ];
     echo DetailView::widget([
         'model' => $model,
@@ -111,12 +113,14 @@ if($providerPrediccionhecha->totalCount){
             'fecha_estimada_final',*/
             [
                 'attribute' => 'estacion.Nombre',
-                'label' => Yii::t('app', 'Id Estacion')
+                'label' => Yii::t('app', 'Estacion')
             ],
+            /*
             [
                 'attribute' => 'user.username',
                 'label' => Yii::t('app', 'Id User')
             ],
+            */
                 ];
     echo Gridview::widget([
         'dataProvider' => $providerPrediccionhecha,

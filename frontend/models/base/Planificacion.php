@@ -47,7 +47,7 @@ class Planificacion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_finca', 'id_prediccion', 'id_cultivo', 'id_user'], 'integer'],
+            [['id_finca', 'id_prediccion', 'id_cultivo', 'id_user','plan_gen','plan_gen'], 'integer'],
             [['aguapend_media','aguapend_maduracion','aguapend_desarrollo','cant_agua', 'agua_pendiente', 'agua_total'],'number'],
             [['fecha'], 'safe']
         ];

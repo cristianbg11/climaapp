@@ -10,16 +10,17 @@ use yii\data\ArrayDataProvider;
         ['class' => 'yii\grid\SerialColumn'],
         ['attribute' => 'id', 'visible' => false],
         'temp_out',
-        'hum_out',
+        /*'hum_out',
         'solar_rad',
-        'wind_speed',
+        'wind_speed',*/
         'etp',
+        'rain',
         'fecha',
         'fecha_estimada_inicial',
         'fecha_estimada_final',
         [
                 'attribute' => 'estacion.Nombre',
-                'label' => Yii::t('app', 'Id Estacion')
+                'label' => Yii::t('app', 'Estacion')
             ],
         [
                 'attribute' => 'user.username',

@@ -5,6 +5,8 @@ use frontend\models\Data;
 use practically\chartjs\Chart;
 use yii\helpers\Url;
 use dosamigos\chartjs\ChartJs;
+use frontend\models\Estacion;
+use frontend\models\Finca;
 
 $this->title = 'Deficit hidrico - densidad agua';
 ?>
@@ -12,13 +14,62 @@ $this->title = 'Deficit hidrico - densidad agua';
 
 <div class="site-index">
 
-    <div class="jumbotron">
-        
-    </div>
-
     <div class="body-content">
 
-    
+
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"># de estaciones</span>
+              <?php
+              $esta_canti=Estacion::find()->count();
+              ?>
+              <span class="info-box-number"><?=$esta_canti?><small></small></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Fincas</span>
+              <?php
+              $canti=Finca::find()->count();
+              ?>
+              <span class="info-box-number"><?=$canti;?></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Ultima prediccion</span>
+              <span class="info-box-number">01/07/2022</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+       
+        <!-- /.col -->
+      </div>
     
 <?= ChartJs::widget([
     'type' => 'line',
@@ -27,7 +78,7 @@ $this->title = 'Deficit hidrico - densidad agua';
         'width' => 400
     ],
     'data' => [
-        'labels' => ["January", "February", "March", "April", "May", "June", "July"],
+        'labels' => ["June", "July", "August", "September", "October", "November", "December"],
         'datasets' => [
             [
                 'label' => "Deficit",
@@ -69,9 +120,11 @@ $this->title = 'Deficit hidrico - densidad agua';
         ]
     ]);
     */
+    /*
     $output = shell_exec('python prediccion.py');
     echo "<pre>$output</pre>";
     echo "hola como esta";
+    */
     ?>
 
 

@@ -157,16 +157,16 @@ foreach ($predicciones as $pred) {
     $arrfecha[] = $pred->fecha; //date('Y-m-d', $fecha);
     $valor = $pred->etp;
     $arretp[] =$valor;
-    $arrvalinicial[] = ($valor * 24) * $modelCult->Coeficiente;
-    $arr_densidad_desarrollo[] = (($valor * 24) * $modelCult->Coeficiente) * $area;
+    $arrvalinicial[] =$pred->rain;// ($valor * 24) * $modelCult->Coeficiente;
+    $arr_densidad_inicial[] = (($valor * 24) * $modelCult->Coeficiente) * $area;
 
-    $arrvalr[] = ($valor * 24) * $modelCult->Desarrollo;
+    $arrvalr[] =$pred->rain;// ($valor * 24) * $modelCult->Desarrollo;
     $arr_densidad_desarrollo[] = (($valor * 24) * $modelCult->Desarrollo) * $area;
 
-    $arrvalmedia[] = ($valor * 24) * $modelCult->Media;
+    $arrvalmedia[] = $pred->rain;//($valor * 24) * $modelCult->Media;
     $arr_densidadmedia[] = (($valor * 24) * $modelCult->Media) * $area; //para coeficiente en duracion mediau
 
-    $arrvalduracion[] = ($valor * 24) * $modelCult->Maduracion;
+    $arrvalduracion[] = $pred->rain;//($valor * 24) * $modelCult->Maduracion;
     $arr_densidadmaduracion[] = (($valor * 24) * $modelCult->Maduracion) * $area; //para coeficiente en d
 
     /*$modeldet = new Detprediccion();
@@ -203,23 +203,24 @@ $arr_densidadmaduracionHum = []; //para coeficiente en durac
         $predData = json_decode($output);*/
 foreach ($predicciones as $pred) {
     //$predicciones as $pred
-    $valor = $pred->rain;
-    $arrvalinicialHum[] = ($valor * 24) * $modelCult->Coeficiente / 200;
-    $arr_densidad_desarrolloHum[] = (($valor * 24) * $modelCult->Coeficiente) * $area / 200;
+    $valor =$pred->etp; //$pred->rain;
+    $arrvalinicialHum[] =$pred->rain;// ($valor * 24) * $modelCult->Coeficiente;
+    $arr_densidad_inicial[] = (($valor * 24) * $modelCult->Coeficiente) * $area;
 
-    $arrvalrHum[] = ($valor * 24) * $modelCult->Desarrollo / 200;
-    $arr_densidad_desarrolloHum[] = (($valor * 24) * $modelCult->Desarrollo) * $area / 200;
+    $arrvalrHum[] = $pred->rain;//($valor * 24) * $modelCult->Desarrollo / 200;
+    $arr_densidad_desarrolloHum[] = (($valor * 24) * $modelCult->Desarrollo) * $area;
 
-    $arrvalmediaHum[] = ($valor * 24) * $modelCult->Media / 200;
-    $arr_densidadmediaHum[] = (($valor * 24) * $modelCult->Media) * $area / 200; //para coeficiente en duracion mediau
+    $arrvalmediaHum[] = $pred->rain;//($valor * 24) * $modelCult->Media;
+    $arr_densidadmediaHum[] = (($valor * 24) * $modelCult->Media) * $area; //para coeficiente en duracion mediau
 
-    $arrvalduracionHum[] = ($valor * 24) * $modelCult->Maduracion / 200;
-    $arr_densidadmaduracionHum[] = (($valor * 24) * $modelCult->Maduracion) * $area / 200; //para coeficiente en d
+    $arrvalduracionHum[] = $pred->rain;//($valor * 24) * $modelCult->Maduracion;
+    $arr_densidadmaduracionHum[] = (($valor * 24) * $modelCult->Maduracion) * $area; //para coeficiente en d
 
 
 
 }
 ?>
+<?php /*
 <h2>Grafico del comportamiento de la Evapotranspiración </h2>
             <?= ChartJs::widget([
                 'type' => 'line',
@@ -238,7 +239,7 @@ foreach ($predicciones as $pred) {
                             'data' => $arretp, //[65, 59, 90, 81, 56, 55, 40]
                             //' yAxisID' => 'y'
                         ],*/
-                        [
+                      /*  [
                             'label' => "Precipitacion",
                             //'backgroundColor' => "rgba(181,50,50,0.2)",
                             'borderColor' => "rgba(181,50,50,1)",
@@ -254,7 +255,7 @@ foreach ($predicciones as $pred) {
                     ]
                 ]
             ]) ?>
-        </div>
+        </div>*/?>
 <div style="background-color:white">
 
     <!-- Nav tabs -->
@@ -291,7 +292,7 @@ foreach ($predicciones as $pred) {
                             'pointHoverBackgroundColor' => "#fff",
                             'pointHoverBorderColor' => "rgba(179,181,198,1)",
                             'type' => 'bar',
-                            'data' => $arr_densidadmedia, //[65, 59, 90, 81, 56, 55, 40]
+                            'data' => $arr_densidad_inicial, //[65, 59, 90, 81, 56, 55, 40]
                             //' yAxisID' => 'y'
                         ],
                         [
@@ -328,7 +329,7 @@ foreach ($predicciones as $pred) {
                             'pointBorderColor' => "#fff",
                             'pointHoverBackgroundColor' => "#fff",
                             'pointHoverBorderColor' => "rgba(179,181,198,1)",
-                            'data' => $arrvalr, //[65, 59, 90, 81, 56, 55, 40]
+                            'data' => $arr_densidad_desarrolloHum, //[65, 59, 90, 81, 56, 55, 40]
                             'type' => 'bar',
                         ],
                         [
@@ -365,10 +366,10 @@ foreach ($predicciones as $pred) {
                             'pointBorderColor' => "#fff",
                             'pointHoverBackgroundColor' => "#fff",
                             'pointHoverBorderColor' => "rgba(179,181,198,1)",
-                            'data' => $arrvalmedia, //[65, 59, 90, 81, 56, 55, 40]
+                            'data' => $arr_densidadmediaHum, //[65, 59, 90, 81, 56, 55, 40]
                         ],
                         [
-                            'label' => "Demanda de Agua",
+                            'label' => "Lluvia (Precipitación)",
                             'backgroundColor' => "rgba(181,50,50,0.2)",
                             'borderColor' => "rgba(181,50,50,1)",
                             'pointBackgroundColor' => "rgba(181,50,50,1)",
@@ -401,7 +402,7 @@ foreach ($predicciones as $pred) {
                             'pointBorderColor' => "#fff",
                             'pointHoverBackgroundColor' => "#fff",
                             'pointHoverBorderColor' => "rgba(179,181,198,1)",
-                            'data' => $arrvalduracion, //[65, 59, 90, 81, 56, 55, 40]
+                            'data' => $arr_densidadmaduracionHum, //[65, 59, 90, 81, 56, 55, 40]
                         ],
                         [
                             'label' => "Precipitacion",

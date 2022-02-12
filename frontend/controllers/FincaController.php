@@ -8,6 +8,7 @@ use frontend\models\Finca;
 use frontend\models\FincaSearch;
 use frontend\models\Planificacion;
 use frontend\models\Predicciong;
+use frontend\models\PlanificacionGen;
 use frontend\models\Prediccionhecha;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -198,20 +199,25 @@ class FincaController extends Controller
 
         $predicion=Prediccionhecha::find()->where(['idprec'=>$id_pred])->all();
        // var_dump($predicion);die();
+       $plangen=new PlanificacionGen();
+       $plangen->idfinca=$id_finca;
+       $plangen->idcultivo=$id_cultivo;
+       $plangen->idprec=$id_pred;
+       $plangen->fecha=date('Y-m-d');
+       $plangen->save();
         $cult=Cultivo::findOne($id_cultivo);
         foreach($predicion as $prec){
             $modelp=new Planificacion();
-
+            $modelp->plan_gen=$plangen->id;
             $modelp->id_cultivo=$id_cultivo;
             $modelp->id_finca=$id_finca;
             $modelp->id_prediccion=$id_pred;
             $modelp->area=$area;
            // var_dump($prec);die();
             $et=$prec->etp;
-            $cant_agua= (($et * 24) * $cult->Maduracion) * $area;
+            $cant_agua= (($et * 24) * $cult->Coeficiente) * $area;
             $cant_aguamedia= (($et * 24) * $cult->Media) * $area;
-            $cant_aguamaduracion= (($et * 24) * $cult->Media) * $area;
-
+            $cant_aguamaduracion= (($et * 24) * $cult->Maduracion) * $area;
             $cant_aguadesarrollo= (($et * 24) * $cult->Desarrollo) * $area;
            
             $modelp->et=$et;
@@ -222,6 +228,6 @@ class FincaController extends Controller
             $modelp->aguapend_desarrollo=$cant_aguadesarrollo;
             $modelp->save();
         }
-        return $this->redirect(['planificacion/riego']);
+        return $this->redirect(['/planificacion-gen']);
     }
 }

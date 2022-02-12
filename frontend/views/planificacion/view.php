@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-sm-3" style="margin-top: 15px">
             
-            <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+            <?= Html::a(Yii::t('app', 'Editar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('app', 'Eliminar'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'fecha',
         'cant_agua',
-        'agua_pendiente',
+        //'agua_pendiente',
         'agua_total',
         [
             'attribute' => 'prediccion.etp',
@@ -51,10 +51,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'attribute' => 'cultivo.Cultivo',
             'label' => Yii::t('app', 'Id Cultivo'),
         ],
+        /*
         [
             'attribute' => 'user.username',
             'label' => Yii::t('app', 'Id User'),
         ],
+        */
     ];
     echo DetailView::widget([
         'model' => $model,
@@ -109,10 +111,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'fecha_estimada_inicial',
         'fecha_estimada_final',
         'id_estacion',
+        /*
         [
             'attribute' => 'user.username',
             'label' => Yii::t('app', 'Id User'),
         ],
+        */
     ];
     echo DetailView::widget([
         'model' => $model->prediccion,

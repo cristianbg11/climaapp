@@ -18,6 +18,7 @@ $search = "$('.search-button').click(function(){
 $this->registerJs($search);
 ?>
 <div class="predicciong-index">
+<h1><?= Html::encode($this->title) ?></h1>
 
 <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -42,7 +43,7 @@ $this->registerJs($search);
         'fecha',
         [
                 'attribute' => 'id_estacion',
-                'label' => Yii::t('app', 'Id Estacion'),
+                'label' => Yii::t('app', 'Estacion'),
                 'value' => function($model){                   
                     return $model->estacion->Nombre;                   
                 },

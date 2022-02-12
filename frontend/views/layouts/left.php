@@ -51,16 +51,19 @@ $menuColors = [
                         ['label' => 'Lecturas', 'url' => ['/lectura']],
                         ['label' => 'Cultivo', 'url' => ['/cultivo']],
                         */
+                        ['label' => 'Lectura actual', 'url' => ['/test/api']],
+                     //   web/test/api
                         ['label' => 'Demanda agua', 'url' => ['/predicciong/demanda']],
                         ['label' => 'Compotamiento ETP', 'url' => ['/predicciong/etp']],
-                        ['label' => 'Detalles', 'url' => ['/detprediccion']],
-                        ['label' => 'mapa lectura', 'url' => ['/lectura/mapalectura']],
+                        //['label' => 'Detalles', 'url' => ['/detprediccion']],
+                        //['label' => 'mapa lectura', 'url' => ['/lectura/mapalectura']],
                         //['label' => 'crear prediccion ', 'url' => ['/prediccionhecha/create']],
                         //['label' => 'Predicciones ', 'url' => ['/prediccionhecha']],
                         //['label' => 'Prediccion G ', 'url' => ['/predicciong']],
-                        ['label' => 'Planificacion ', 'url' => ['/planificacion']],
-                        ['label' => 'Riego ', 'url' => ['/planificacion/riego']],
-                        ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                        ['label' => 'Planificacion Riego', 'url' => ['/planificacion-gen']],
+                        //['label' => 'Planificacion Riego ', 'url' => ['/planificacion/riego']],
+                        ['label' => 'Temperatura alerta', 'url' => ['/predicciong/alerta']],
+                        //['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                         /*
                             [
                                 'label' => 'Some tools',
@@ -108,11 +111,12 @@ $menuColors = [
                         ['label' => 'mapa lectura', 'url' => ['/lectura/mapalectura']],
                         */
                         ['label' => 'Generar prediccion ', 'url' => ['/prediccionhecha/create']],
+                        ['label' => 'Generar prediccion Temp ', 'url' => ['/prediccionhecha/create-temp']],
                         //['label' => 'Predicciones ', 'url' => ['/prediccionhecha']],
                         ['label' => 'Planificar Prediccion ', 'url' => ['/predicciong']],
                         //['label' => 'Planificacion ', 'url' => ['/planificacion']],
                         //['label' => 'Riego ', 'url' => ['/planificacion/riego']],
-                        ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                        //['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
 
                     ];
                     break;
@@ -120,7 +124,7 @@ $menuColors = [
                 case 'config':
                     $items = [
 
-                        ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
+                        //['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                         //['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                         ['label' => 'Finca', 'url' => ['/finca']],
                         ['label' => 'finca-cultivo ', 'url' => ['/cultivo-finca']],
@@ -138,7 +142,7 @@ $menuColors = [
                         ['label' => 'Planificacion ', 'url' => ['/planificacion']],
                         ['label' => 'Riego ', 'url' => ['/planificacion/riego']],
                         */
-                        ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                        //['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
 
                     ];
                     break;
@@ -164,7 +168,7 @@ $menuColors = [
                 ['label' => 'Prediccion G ', 'url' => ['/predicciong']],
                 ['label' => 'Planificacion ', 'url' => ['/planificacion']],
                 ['label' => 'Calendario Riego ', 'url' => ['/planificacion/riego']],
-                ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                //['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
 
             ];
         }

@@ -41,7 +41,7 @@ $this->registerJs($search);
         'fecha',
         [
                 'attribute' => 'id_estacion',
-                'label' => Yii::t('app', 'Id Estacion'),
+                'label' => Yii::t('app', 'Estacion'),
                 'value' => function($model){                   
                     return $model->estacion->Nombre;                   
                 },

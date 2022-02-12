@@ -17,7 +17,7 @@ class Planificacion extends BasePlanificacion
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['id_finca', 'id_prediccion', 'id_cultivo', 'id_user'], 'integer'],
+            [['id_finca', 'id_prediccion', 'id_cultivo', 'id_user','plan_gen'], 'integer'],
             [['aguapend_media','aguapend_maduracion','aguapend_desarrollo','cant_agua', 'agua_pendiente', 'agua_total'],'number'],
             [['fecha'], 'safe']
         ]);

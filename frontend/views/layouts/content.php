@@ -3,11 +3,11 @@ use yii\widgets\Breadcrumbs;
 use dmstr\widgets\Alert;
 
 ?>
-<div class="content-wrapper">
+<div class="content-wrapper" style="min-height: 547px;">
     <section class="content-header">
         <?php if (isset($this->blocks['content-header'])) { ?>
             <h1><?= $this->blocks['content-header'] ?></h1>
-        <?php } else { ?>
+        <?php } /* else { ?>
             <h1>
                 <?php
                 if ($this->title !== null) {
@@ -19,7 +19,7 @@ use dmstr\widgets\Alert;
                     echo ($this->context->module->id !== \Yii::$app->id) ? '<small>Module</small>' : '';
                 } ?>
             </h1>
-        <?php } ?>
+        <?php }*/ ?>
 
         <?=
         Breadcrumbs::widget(
