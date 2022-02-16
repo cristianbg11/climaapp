@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-
+use yii\helpers\Url;
 /* @var $this \yii\web\View */
 /* @var $content string */
 $modMenu=[
@@ -75,12 +75,12 @@ $modMenu=[
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                                <a href="<?=Url::to(['/user/settings/profile'])?>" class="btn btn-default btn-flat">Perfil</a>
                             </div>
                             <div class="pull-right">
                                 <?= Html::a(
                                     'Sign out',
-                                    ['/site/logout'],
+                                    ['/user/security/logout'],
                                     ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
                                 ) ?>
                             </div>

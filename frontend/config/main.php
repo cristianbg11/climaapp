@@ -16,17 +16,20 @@ return [
         'datecontrol' => [
             'class' => '\kartik\datecontrol\Module',
             // see settings on http://demos.krajee.com/datecontrol#module
+        ],
+        'user' => [
+            'class' => 'dektrium\user\Module',
         ]
     ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
-        'user' => [
+        /*'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
-        ],
+        ],*/
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',

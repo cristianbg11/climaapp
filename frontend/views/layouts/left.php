@@ -168,7 +168,7 @@ $menuColors = [
                 ['label' => 'Prediccion G ', 'url' => ['/predicciong']],
                 ['label' => 'Planificacion ', 'url' => ['/planificacion']],
                 ['label' => 'Calendario Riego ', 'url' => ['/planificacion/riego']],
-                //['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+               // ['label' => 'Login', 'url' => ['user/security/login'], 'visible' =>true || Yii::$app->user->isGuest],
 
             ];
         }
