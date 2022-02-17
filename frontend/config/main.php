@@ -24,20 +24,21 @@ return [
         ],
         'rbac' => ['class' => 'yii2mod\rbac\Module',]
     ],
-    /*'as access' => [
-        'class' => \yii\filters\AccessControl::className(), //AccessControl::className(),
-        'rules' => [
-            [
-                'actions' => ['login', 'error'],
-                'allow' => true,
-            ],
-            [
-                'allow' => true,
-                'roles' => ['@'],
-            ],
-        ],
-    ],*/
+    /* 'as access' => [
+      'class' => \yii\filters\AccessControl::className(), //AccessControl::className(),
+      'rules' => [
+      [
+      'actions' => ['login', 'error'],
+      'allow' => true,
+      ],
+      [
+      'allow' => true,
+      'roles' => ['@'],
+      ],
+      ],
+      ], */
     'components' => [
+        
         'i18n' => [
             'translations' => [
                 '*' => [

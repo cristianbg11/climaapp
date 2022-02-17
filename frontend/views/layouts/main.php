@@ -143,8 +143,10 @@ $homeurl = '/manufactura'
                                 <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">                                
 
                                     <li>
-                                        <?=Html::a('<i class="ace-icon fa fa-power-off"></i>Logout',['/user/security/logout'], ['data-method' => 'POST'])?>
-                                        
+                                        <a href="#" onclick="goLogout()">
+                                            <i class="ace-icon fa fa-power-off"></i>
+                                            Logout
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
@@ -293,7 +295,9 @@ $homeurl = '/manufactura'
                 <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
             </a>
         </div><!-- /.main-container -->
-
+        <form id="logoutForm" action="<?=Url::to(['/user/security/logout'])?>" method="post">
+            <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
+        </form>
         <!-- basic scripts -->
 
 
@@ -330,9 +334,15 @@ $homeurl = '/manufactura'
         <!-- ace scripts -->
         <script src="<?= $homeurl ?>/mant_assets/js/ace-elements.min.js"></script>
         <script src="<?= $homeurl ?>/mant_assets/js/ace.min.js"></script>
-
+        
+        <script type="text/javascript">
+            function goLogout(){
+                $('#logoutForm').submit();
+            }
+        </script>
 
         <?php $this->endBody() ?>
+        
     </body>
 </html>
 <?php $this->endPage() ?>
