@@ -11,7 +11,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 
 AppAsset::register($this);
-$homeurl = '/manufactura'
+$homeurl = Url::base(); 
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
