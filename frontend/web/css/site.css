@@ -118,3 +118,14 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+.skin-planning{
+    background: #D87C04!important;
+}
+.skin-planning .user-info,.skin-planning .navbar-header ul li,.skin-planning .navbar-header ul li a{
+    background: #FC9303;
+}
+.skin-planning .navbar-header ul li a:hover{
+    background: #FC9303;
+}
