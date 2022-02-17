@@ -30,6 +30,10 @@ return [
                 ],
             ],
         ],
+         'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest', 'user'],
+        ],
     ],
     'params' => $params,
 ];

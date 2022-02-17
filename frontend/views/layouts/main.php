@@ -134,7 +134,7 @@ $homeurl = '/manufactura'
 
                                     <span class="user-info">
                                         <small>Welcome,</small>
-                                        <?php echo Yii::$app->user->identity->uname; ?>
+                                        <?php echo Yii::$app->user->identity->username; ?>
                                     </span>
 
                                     <i class="ace-icon fa fa-caret-down"></i>
@@ -143,10 +143,8 @@ $homeurl = '/manufactura'
                                 <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">                                
 
                                     <li>
-                                        <a href="<?= $homeurl ?>/site/logout">
-                                            <i class="ace-icon fa fa-power-off"></i>
-                                            Logout
-                                        </a>
+                                        <?=Html::a('<i class="ace-icon fa fa-power-off"></i>Logout',['/user/security/logout'], ['data-method' => 'POST'])?>
+                                        
                                     </li>
                                 </ul>
                             </li>
