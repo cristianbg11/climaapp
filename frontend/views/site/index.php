@@ -18,41 +18,41 @@ $this->title = 'Deficit hidrico - densidad agua';
 <div class="row">
 
         <div class="col-xs-2 col-lg-2 text-center">
-            <a href="/manufactura/v2/web/orden-mayor/import" class="btn btn-app btn-sm btn-danger">
+            <a href="/climaapp/frontend/web/prediccionhecha/create" class="btn btn-app btn-sm btn-danger">
                 <i class="ace-icon fa fa-upload bigger-160"></i>
-                Import   
+                Generar   
             </a>
-            <p><big style="font-weight:bold">PREDECIR</big></p>
+            <p><big style="font-weight:bold">Prediccion</big></p>
         </div>
 
          <div class="col-xs-2 col-lg-2 text-center">
-            <a href="/manufactura/v2/web/orden-mayor/import-prod-numb" class="btn btn-app btn-sm btn-warning">
+            <a href="/climaapp/frontend/web/prediccionhecha/create-temp" class="btn btn-app btn-sm btn-warning">
                 <i class="ace-icon fa fa-upload bigger-160"></i>
-                Import   
+                Generar   
             </a>
-            <p><big style="font-weight:bold">Prod. Orders</big></p>
+            <p><big style="font-weight:bold">Pred. Tiempo</big></p>
         </div>
         <div class="col-xs-2 col-lg-2 text-center">
-            <a onclick="showForecastIcons()" class="btn btn-app btn-sm btn-warning">
+            <a href="/climaapp/frontend/web/predicciong" class="btn btn-app btn-sm btn-warning">
                 <i class="ace-icon fa fa-calendar-plus-o bigger-160"></i>
-                Forecast  
+                Planificar  
             </a>
-            <p><big style="font-weight:bold">Scenarios</big></p>
+            <p><big style="font-weight:bold">Pred</big></p>
         </div>
         <div class="col-xs-2 col-lg-2 text-center">
-            <a href="/manufactura/v2/web/plan/index" class="btn btn-app btn-sm btn-info">
+            <a href="/climaapp/frontend/web/planificacion-gen" class="btn btn-app btn-sm btn-info">
                 <i class="ace-icon fa fa-calendar bigger-160"></i>
-                Plan  
+                Planificar 
             </a>
-            <p><big style="font-weight:bold">Forecasts</big></p>
+            <p><big style="font-weight:bold">Riego</big></p>
         </div>
 
         <div class="col-xs-2 col-lg-2 text-center">
             <a href="/manufactura/v2/web/plan/planes_transfer" class="btn btn-app btn-sm btn-success">
                 <i class="ace-icon fa fa-paper-plane bigger-160"></i>
-                Transfer
+                Compotamiento
             </a>
-            <p><big style="font-weight:bold">Orders Create</big> </p> 
+            <p><big style="font-weight:bold">Historico</big> </p> 
         </div>
 
 
