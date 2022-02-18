@@ -57,7 +57,7 @@ use frontend\models\StationData;
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        //die($this->station_id);
         $query->andFilterWhere([
             'id' => $this->id,
             'station_id' => $this->station_id,

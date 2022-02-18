@@ -54,11 +54,12 @@ class StationDataController extends Controller {
             
             $fechaini = $request->post('fecha-ini');
             $fechafin = $request->post('fecha-fin');
-            $model->station_id = $request->post('StationData')['station_id'];
+            $searchModel->station_id = $request->post('StationData')['station_id'];
+             $model->station_id=$searchModel->station_id;
             if (!empty($fechaini) && !empty($fechafin)) {
                 $showData = true;
                  $searchModel->fecha_ini = $fechaini;
-            $searchModel->fecha_fin = $fechafin;
+                 $searchModel->fecha_fin = $fechafin;
             }
             
           /*   if ($ini == '' || $fin == '') {
