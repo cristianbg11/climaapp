@@ -51,6 +51,7 @@ if (isset($this->context->currMod)) {
                 ['label' => 'Planificacion Riego', 'url' => ['/planificacion-gen'],'icon'=>'fa-calendar'],
                 //['label' => 'Planificacion Riego ', 'url' => ['/planificacion/riego'],'icon'=>'fa-cog'],
                 ['label' => 'Temperatura alerta', 'url' => ['/predicciong/alerta'],'icon'=>'fa-exclamation-circle'],
+                ['label' => 'Historico', 'url' => ['/station-data/historico'],'icon'=>'fa-exclamation-circle'],
                     //['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     /*
                       [

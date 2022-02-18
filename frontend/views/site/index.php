@@ -22,7 +22,7 @@ $this->title = 'Deficit hidrico - densidad agua';
                 <i class="ace-icon fa fa-upload bigger-160"></i>
                 Import   
             </a>
-            <p><big style="font-weight:bold">Orders (BUY)</big></p>
+            <p><big style="font-weight:bold">PREDECIR</big></p>
         </div>
 
          <div class="col-xs-2 col-lg-2 text-center">

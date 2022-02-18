@@ -17,10 +17,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
-    <?= $form->field($model, 'station_id')->textInput(['maxlength' => true, 'placeholder' => 'Station']) ?>
-
+    <?= $form->field($model, 'station_id')->textInput(['maxlength' => true, 'placeholder' => 'Estación']) ?>
+<?php /*
     <?= $form->field($model, 'ts')->textInput(['maxlength' => true, 'placeholder' => 'Ts']) ?>
-
+*/?>
     <?= $form->field($model, 'date')->widget(\kartik\datecontrol\DateControl::classname(), [
         'type' => \kartik\datecontrol\DateControl::FORMAT_DATETIME,
         'saveFormat' => 'php:Y-m-d H:i:s',
@@ -32,9 +32,9 @@ use yii\widgets\ActiveForm;
             ]
         ],
     ]); ?>
-
+<?php /*
     <?= $form->field($model, 'migration')->checkbox() ?>
-
+*/?>
     <?php /* echo $form->field($model, 'arch_int')->textInput(['placeholder' => 'Arch Int']) */ ?>
 
     <?php /* echo $form->field($model, 'rev_type')->textInput(['placeholder' => 'Rev Type']) */ ?>

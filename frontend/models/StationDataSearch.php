@@ -12,6 +12,8 @@ use frontend\models\StationData;
  */
  class StationDataSearch extends StationData
 {
+    var $fecha_ini;
+    var $fecha_fin;
     /**
      * @inheritdoc
      */
@@ -164,7 +166,9 @@ use frontend\models\StationData;
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-
+        if (!empty($this->fecha_ini) && !empty($this->fecha_fin)) {
+            $query->andWhere(['between', 'date', $this->fecha_ini, $this->fecha_fin]);
+        }
         $query->andFilterWhere(['like', 'ts', $this->ts])
             ->andFilterWhere(['like', 'migration', $this->migration]);
 
