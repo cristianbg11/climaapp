@@ -121,87 +121,103 @@ use frontend\models\Estacion;
 </style>
 
 <?php
-$data_hist=StationData::find()->where(['station_id' => $id_sta, 'temp_out' => $var])->andWhere(['between','date',$fecha_ini,$fecha_fin])->all();
-$estacion= Estacion::findOne($id_sta);
+$data_hist = StationData::find()->where(['station_id' => $id_sta])->andWhere(['between', 'date', $fecha_ini, $fecha_fin])->all();
+$estacion = Estacion::findOne($id_sta);
 
-/*$modelCult = Cultivo::findOne($idcultivo);
-$fincacult = CultivoFinca::find()->where(['id_finca' => $idfinca, 'id_cultivo' => $idcultivo])->one();
-//var_dump($fincacult);die();
-$area = $fincacult->tam_tareas;*/
+/* $modelCult = Cultivo::findOne($idcultivo);
+  $fincacult = CultivoFinca::find()->where(['id_finca' => $idfinca, 'id_cultivo' => $idcultivo])->one();
+  //var_dump($fincacult);die();
+  $area = $fincacult->tam_tareas; */
 ?>
 <?php //$predicciones = Prediccionhecha::find()->where(['idprec' => $id])->all(); ?>
 <?php
+//echo count($data_hist).$id_sta.$fecha_ini.$fecha_fin;
 $arr = $data_hist; //explode('**progdata**', $output);
 $arrfecha = [];
-$arretp=[];
-/*$arrvalr = []; //para coeficiente en desarrollo
-$arrvalmedia = []; //para coeficiente en duracion media
-$arrvalduracion = []; //para coeficiente en maduracion
-*/
-/*$arr_densidad_desarrollo = []; //para coeficiente en duracion
-$arr_densidadmedia = []; //para coeficiente en duracion media
-$arr_densidadmaduracion = []; //para coeficiente en durac
-$arretp=[];
-$arrvalinicialHum = [];*/
+$arretp = [];
+/* $arrvalr = []; //para coeficiente en desarrollo
+  $arrvalmedia = []; //para coeficiente en duracion media
+  $arrvalduracion = []; //para coeficiente en maduracion
+ */
+/* $arr_densidad_desarrollo = []; //para coeficiente en duracion
+  $arr_densidadmedia = []; //para coeficiente en duracion media
+  $arr_densidadmaduracion = []; //para coeficiente en durac
+  $arretp=[];
+  $arrvalinicialHum = []; */
 /// if (count($arr) == 3) {
 /* $modelpred = new Prediccion();
-        //$modelpred->calculo_estimado=$deficit;
-        //$modelpred->id_variable=1;
+  //$modelpred->calculo_estimado=$deficit;
+  //$modelpred->id_variable=1;
 
-        $modelpred->id_cultivo = $modelCult->id;
-        $modelpred->fecha = date('Y-m-d');
-        if (!$modelpred->save()) {
-            var_dump($modelpred->getErrors());
-            die();
-        }*/
+  $modelpred->id_cultivo = $modelCult->id;
+  $modelpred->fecha = date('Y-m-d');
+  if (!$modelpred->save()) {
+  var_dump($modelpred->getErrors());
+  die();
+  } */
 //$output = $arr[1];
 //$predData = json_decode($output);
 foreach ($arr as $pred) {
     // $fecha = $fecha / 1000;
-    $arrfecha[] = $pred->date; //date('Y-m-d', $fecha);
+    $arrfecha[] = strtotime($pred->date)*1000; //date('Y-m-d', $fecha);
     $valor = $pred->et;
-    $arretp[] =$valor;
-    
+    $arretp[] = $valor;
 }
-
 ?>
 <?php //if(count($arretp)>0):?>
 <h2>Grafico del comportamiento de la Temperatura </h2>
-            <?= ChartJs::widget([
-                'type' => 'line',
-                'data' => [
-                    'labels' => $arrfecha, //["January", "February", "March", "April", "May", "June", "July"],
-                    'datasets' => [
-                        /*[
-                            'label' => "Demanda de Agua",
-                            'backgroundColor' => "rgba(0,0,200,0.7)",
-                            'borderColor' => "rgba(179,181,198,1)",
-                            'pointBackgroundColor' => "rgba(179,181,198,1)",
-                            'pointBorderColor' => "#fff",
-                            'pointHoverBackgroundColor' => "#fff",
-                            'pointHoverBorderColor' => "rgba(179,181,198,1)",
-                            'type' => 'bar',
-                            'data' => $arretp, //[65, 59, 90, 81, 56, 55, 40]
-                            //' yAxisID' => 'y'
-                        ],*/
-                        [
-                            'label' => "Precipitacion",
-                            //'backgroundColor' => "rgba(181,50,50,0.2)",
-                            'borderColor' => "rgba(181,50,50,1)",
-                            'pointBackgroundColor' => "rgba(181,50,50,1)",
-                            'pointBorderColor' => "#f00",
-                            'pointHoverBackgroundColor' => "#f00",
-                            'pointHoverBorderColor' => "rgba(181,50,50,1)",
-                            'data' => $arretp,
-                            'lineTension'=>0,
-                            'type' => 'line',
-                            //' yAxisID' => 'y1'
-                        ]
-                    ]
+<?=
+ChartJs::widget([
+    'type' => 'line',
+    'clientOptions' => [
+        'scales' => [
+            'xAxes' => [
+                'type' => 'time',
+                'time' => [
+                    'unit' => 'day',
+                    'unitStepSize' => 1
                 ]
-            ]) ?>
-        </div>
-
-     
-<?php //endif;?>
+            ]
+        ]
+    ],
+    'data' => [
+        'labels' => $arrfecha, //["January", "February", "March", "April", "May", "June", "July"],
+        'datasets' => [
+            /* [
+              'label' => "Demanda de Agua",
+              'backgroundColor' => "rgba(0,0,200,0.7)",
+              'borderColor' => "rgba(179,181,198,1)",
+              'pointBackgroundColor' => "rgba(179,181,198,1)",
+              'pointBorderColor' => "#fff",
+              'pointHoverBackgroundColor' => "#fff",
+              'pointHoverBorderColor' => "rgba(179,181,198,1)",
+              'type' => 'bar',
+              'data' => $arretp, //[65, 59, 90, 81, 56, 55, 40]
+              //' yAxisID' => 'y'
+              ], */
+            [
+                'label' => "Precipitacion",
+                //'backgroundColor' => "rgba(181,50,50,0.2)",
+                'borderColor' => "rgba(181,50,50,1)",
+                'pointBackgroundColor' => "rgba(181,50,50,1)",
+                'pointBorderColor' => "#f00",
+                'pointHoverBackgroundColor' => "#f00",
+                'pointHoverBorderColor' => "rgba(181,50,50,1)",
+                'data' => $arretp,
+                'lineTension' => 0,
+                'type' => 'line',
+            //' yAxisID' => 'y1'
+            ]
+        ]
+    ]
+])
+?>
 </div>
+
+
+<?php //endif; ?>
+<?php /*
+<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js" integrity="sha512-F+u8eWHrfY8Xw9BLzZ8rG/0wIvs0y+JyRJrXjp3VjtFPylAEEGwKbua5Ip/oiVhaTDaDs4eU2Xtsxjs/9ag2bQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+ 
+ */

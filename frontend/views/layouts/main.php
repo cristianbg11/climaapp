@@ -21,7 +21,7 @@ $homeurl = Url::base();
 
         <?php $this->registerCsrfMetaTags() ?>
 
-        <title><?= Html::encode(!empty($this->title) ? $this->title : 'Zapito S-ERP®') ?></title>
+        <title><?= Html::encode(!empty($this->title) ? $this->title : 'ClimaApp') ?></title>
 
         <script src="<?= $homeurl ?>/mant_assets/js/jquery-2.1.4.min.js"></script>
 
