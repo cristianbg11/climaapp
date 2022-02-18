@@ -127,7 +127,7 @@ $homeurl = Url::base();
                         <li class="light-blue dropdown-modal">
                             <?php if (!Yii::$app->user->isGuest): ?>
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                  
+
 
                                     <span class="user-info">
                                         <small>Bienvenido,</small>
@@ -147,11 +147,11 @@ $homeurl = Url::base();
                                     </li>
                                 </ul>
                             <?php else: ?>
-<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                  
+                                <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
 
                                     <span class="user-info">
-                                         
+
                                         Usuario
                                     </span>
 
@@ -161,7 +161,7 @@ $homeurl = Url::base();
                                 <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">                                
 
                                     <li>
-                                        <a href="<?=Url::to(['/user/security/login'])?>">
+                                        <a href="<?= Url::to(['/user/security/login']) ?>">
                                             <i class="ace-icon fa fa-user"></i>
                                             Login
                                         </a>
