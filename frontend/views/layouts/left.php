@@ -39,7 +39,7 @@ if (isset($this->context->currMod)) {
                   ['label' => 'Lecturas', 'url' => ['/lectura'],'icon'=>'fa-cog'],
                   ['label' => 'Cultivo', 'url' => ['/cultivo'],'icon'=>'fa-cog'],
                  */
-                ['label' => 'Lectura actual', 'url' => ['/test/api'],'icon'=>'fa-cog'],
+                ['label' => 'Lectura actual', 'url' => ['/test/api'],'icon'=>'fa-cog','show'=>\Yii::$app->user->can('admin') || \Yii::$app->user->can('productor')],
                 //   web/test/api
                 ['label' => 'Demanda agua', 'url' => ['/predicciong/demanda'],'icon'=>'fa-tint'],
                 ['label' => 'Compotamiento ETP', 'url' => ['/predicciong/etp'],'icon'=>'fa-cloud'],
@@ -152,9 +152,16 @@ if (isset($this->context->currMod)) {
         ['label' => 'Prediccion G ', 'url' => ['/predicciong'],'icon'=>'fa-cog'],
         ['label' => 'Planificacion ', 'url' => ['/planificacion'],'icon'=>'fa-cog'],
         ['label' => 'Calendario Riego ', 'url' => ['/planificacion/riego'],'icon'=>'fa-cog'],
+        //['label' => 'Login', 'url' => ['/prediccion'],'icon'=>'fa-cog'],
             // ['label' => 'Login', 'url' => ['user/security/login'], 'visible' =>true || Yii::$app->user->isGuest],
     ];
 }
+
+
+$items[] = 
+['label' => 'Login', 'url' => ['user/security/login'], 'show' => Yii::$app->user->isGuest]
+ ;
+
 
 foreach ($items as $k => $item) {
     $items[$k]['class'] = isset($item['url']) && strstr($_SERVER['REQUEST_URI'], $item['url'][0]) ? 'active' : '';

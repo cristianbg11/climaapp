@@ -165,7 +165,7 @@ foreach ($arr as $pred) {
 }
 ?>
 <?php //if(count($arretp)>0):?>
-<h2>Grafico del comportamiento de la Temperatura </h2>
+<h2>Grafico del comportamiento</h2>
 <?=
 ChartJs::widget([
     'type' => 'line',

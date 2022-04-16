@@ -48,9 +48,9 @@ $this->title = 'Deficit hidrico - densidad agua';
         </div>
 
         <div class="col-xs-2 col-lg-2 text-center">
-            <a href="/manufactura/v2/web/plan/planes_transfer" class="btn btn-app btn-sm btn-success">
+            <a href="/climaapp/frontend/web/station-data/historico" class="btn btn-app btn-sm btn-success">
                 <i class="ace-icon fa fa-paper-plane bigger-160"></i>
-                Compotamiento
+                Comportamiento
             </a>
             <p><big style="font-weight:bold">Historico</big> </p> 
         </div>
@@ -101,7 +101,7 @@ $this->title = 'Deficit hidrico - densidad agua';
 
             <div class="info-box-content">
               <span class="info-box-text">Ultima prediccion</span>
-              <span class="info-box-number">01/07/2022</span>
+              <span class="info-box-number">02/18/2022</span>
             </div>
             <!-- /.info-box-content -->
           </div>

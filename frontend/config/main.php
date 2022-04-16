@@ -20,7 +20,8 @@ return [
         ],
         'user' => [
             'class' => 'dektrium\user\Module',
-            'admins' => ['admin']
+            'admins' => ['admin'],
+            'enableConfirmation'=>false
         ],
         'rbac' => ['class' => 'yii2mod\rbac\Module',]
     ],
