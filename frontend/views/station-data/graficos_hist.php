@@ -159,7 +159,7 @@ $arretp = [];
 //$predData = json_decode($output);
 foreach ($arr as $pred) {
     // $fecha = $fecha / 1000;
-    $arrfecha[] = strtotime($pred->date)*1000; //date('Y-m-d', $fecha);
+    $arrfecha[] = $pred->date; //date('Y-m-d', $fecha);
     $valor = $pred->et;
     $arretp[] = $valor;
 }
@@ -169,7 +169,7 @@ foreach ($arr as $pred) {
 <?=
 ChartJs::widget([
     'type' => 'line',
-    'clientOptions' => [
+    /*'clientOptions' => [
         'scales' => [
             'xAxes' => [
                 'type' => 'time',
@@ -179,7 +179,7 @@ ChartJs::widget([
                 ]
             ]
         ]
-    ],
+    ],*/
     'data' => [
         'labels' => $arrfecha, //["January", "February", "March", "April", "May", "June", "July"],
         'datasets' => [

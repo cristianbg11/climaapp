@@ -11,7 +11,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 
 AppAsset::register($this);
-$homeurl = Url::base(); 
+$homeurl = Url::base();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -112,28 +112,25 @@ $homeurl = Url::base();
                     <span class="icon-bar"></span>
                 </button>
 
-                
-                
-
-                    <div class="pull-left">
-                        <h3 class="white">ClimaApp</h3>
-                    </div>
-                
-                <?php if (!Yii::$app->user->isGuest): ?>
-                    <div class="navbar-buttons navbar-header pull-right" role="navigation">
-                        <ul class="nav ace-nav">
 
 
-                            <li class="light-blue dropdown-modal">
+
+                <div class="pull-left">
+                    <h3 class="white">ClimaApp</h3>
+                </div>
+
+
+                <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                    <ul class="nav ace-nav">
+
+
+                        <li class="light-blue dropdown-modal">
+                            <?php if (!Yii::$app->user->isGuest): ?>
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                    <?php
-                                    /*
-                                      <img class="nav-user-photo" src="<?=$homeurl?>/mant_assets/images/avatars/user.jpg" />
-                                     */
-                                    ?>
+
 
                                     <span class="user-info">
-                                        <small>Welcome,</small>
+                                        <small>Bienvenido,</small>
                                         <?php echo Yii::$app->user->identity->username; ?>
                                     </span>
 
@@ -149,11 +146,32 @@ $homeurl = Url::base();
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
-                        </ul>
-                    </div>
-                
-                <?php endif; ?>
+                            <?php else: ?>
+                                <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+
+                                    <span class="user-info">
+
+                                        Usuario
+                                    </span>
+
+                                    <i class="ace-icon fa fa-caret-down"></i>
+                                </a>
+
+                                <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">                                
+
+                                    <li>
+                                        <a href="<?= Url::to(['/user/security/login']) ?>">
+                                            <i class="ace-icon fa fa-user"></i>
+                                            Login
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php endif; ?>
+                        </li>
+                    </ul>
+                </div>
+
 
             </div><!-- /.navbar-container -->
         </div>
@@ -176,7 +194,7 @@ $homeurl = Url::base();
                     } catch (e) {
                     }
                 </script>
-                
+
 
                 <?php //= $this->render('menu/' . $this->context->mod . 'Menu', ['homeurl' => $homeurl, 'mod' => $this->context->mod]); ?>
                 <?= $this->render('left') ?>
@@ -191,22 +209,21 @@ $homeurl = Url::base();
                     'url' => ['site/index'],
                     'module' => 'visualizacion',
                     'label' => 'Visualicaci&oacute;n Data',
-                    'icon'=>'fa-table'
+                    'icon' => 'fa-table'
                 ],
                 [
                     'url' => ['site/predicciones'],
                     'label' => 'Predicciones',
                     'module' => 'predicciones',
-                    'icon'=>'fa-line-chart'
+                    'icon' => 'fa-line-chart'
                 ],
                 [
                     'url' => ['site/config'],
                     'label' => 'Configuracion',
                     'module' => 'config',
-                    'icon'=>'fa-cogs'
+                    'icon' => 'fa-cogs'
                 ],
             ];
-            
             ?>
             <div class="main-content">
 
@@ -218,7 +235,7 @@ $homeurl = Url::base();
 
                                 <li class="hover <?= isset($this->context->currMod) && $this->context->currMod == $item['module'] ? 'active' : '' ?>">
                                     <a href="<?= Url::to($item['url']) ?>">
-                                        <i class="menu-icon fa <?=$item['icon']?>"></i>
+                                        <i class="menu-icon fa <?= $item['icon'] ?>"></i>
                                         <span class="menu-text"> <?= $item['label'] ?> </span>
 
                                     </a>
@@ -295,7 +312,7 @@ $homeurl = Url::base();
                 <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
             </a>
         </div><!-- /.main-container -->
-        <form id="logoutForm" action="<?=Url::to(['/user/security/logout'])?>" method="post">
+        <form id="logoutForm" action="<?= Url::to(['/user/security/logout']) ?>" method="post">
             <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
         </form>
         <!-- basic scripts -->
@@ -334,15 +351,15 @@ $homeurl = Url::base();
         <!-- ace scripts -->
         <script src="<?= $homeurl ?>/mant_assets/js/ace-elements.min.js"></script>
         <script src="<?= $homeurl ?>/mant_assets/js/ace.min.js"></script>
-        
+
         <script type="text/javascript">
-            function goLogout(){
+            function goLogout() {
                 $('#logoutForm').submit();
             }
         </script>
 
         <?php $this->endBody() ?>
-        
+
     </body>
 </html>
 <?php $this->endPage() ?>
