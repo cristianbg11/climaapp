@@ -47,14 +47,14 @@ class StationDataController extends Controller {
         $fechafin = '';
         $showData = false;
         $searchModel = new StationDataSearch();
-        if ($request->isPost) {
-            if ($request->post('variables') != null) {
-                $variables = $request->post('variables');
-            }
+        if ($request->get('variables')!=null) {
+           // if ($request->post('variables') != null) {
+                $variables = $request->get('variables');
+           // }
             
-            $fechaini = $request->post('fecha-ini');
-            $fechafin = $request->post('fecha-fin');
-            $searchModel->station_id = $request->post('StationData')['station_id'];
+            $fechaini = $request->get('fecha-ini');
+            $fechafin = $request->get('fecha-fin');
+            $searchModel->station_id = $request->get('StationData')['station_id'];
              $model->station_id=$searchModel->station_id;
             if (!empty($fechaini) && !empty($fechafin)) {
                 $showData = true;
@@ -70,7 +70,7 @@ class StationDataController extends Controller {
         }*/
         }
 
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->searchByDay(Yii::$app->request->queryParams);
         
 
         return $this->render('historico', [

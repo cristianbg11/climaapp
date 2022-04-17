@@ -37,8 +37,8 @@ pd.set_option('display.max_rows', 100)
 
 
 #you can put other variables here, but I preferred not to as too much missing data there.
-df1 = data[['station_id','date','temp_out','temp_in','hum_out','rain_day_mm','et','uv']]
-
+#df1 = data[['station_id','date','temp_out','temp_in','hum_out','rain_day_mm','et','uv']]
+df1 = data[['station_id','date','temp_out','temp_in','hum_out','rainfall_mm','et','uv']]
 
 # In[6]:
 

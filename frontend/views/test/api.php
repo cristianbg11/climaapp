@@ -30,8 +30,8 @@
                 <?php endif;?>
                 </td>
                 <td>
-                    <?php if (!empty($esta->live_data->data->davis_current_observation->pressure_day_low_in)) : ?>
-                        <?= $esta->live_data->data->davis_current_observation->pressure_day_low_in ?>
+                    <?php if (!empty($esta->live_data->data->temp_c)) : ?>
+                        <?= $esta->live_data->data->temp_c ?>
                     <?php endif ?>
                 </td>
 

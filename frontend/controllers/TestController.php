@@ -90,7 +90,7 @@ class TestController extends Controller {
         }
         //echo $data;die();
         $data = json_decode($data);
-       // echo json_encode($data); die();
+        //echo json_encode($data); die();
 //      $data[]
 //$ret=callRest('https://climared.com/api/v1/tokens/create','6|kl9Sjicb87UP1app9BKx62aqPRcwA10eHHauNmcN',true, json_encode($payload));
          return $this->render('api',['data'=>$data]);

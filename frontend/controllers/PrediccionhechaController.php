@@ -82,7 +82,7 @@ class PrediccionhechaController extends Controller
             $tempData=[];
 
 
-            $command="python Forecast_Weather_Data_13nov_Params_Pre.py 7 rain_day_mm 250 $ini $fin";
+            $command="python3 Forecast_Weather_Data_13nov_Params_Pre.py $idesta rainfall_mm 250 $ini $fin";
            // echo $command;
             $output1 = shell_exec($command);
             //print_r($output1);die();
@@ -97,7 +97,7 @@ class PrediccionhechaController extends Controller
             }
             
 
-            /**$command="python Forecast_Weather_Data_13nov_Params.py 7 temp_out 250 $ini $fin";
+            $command="python3 Forecast_Weather_Data_13nov_Params_Pre.py  $idesta temp_out 250 $ini $fin";
            // echo $command;
             $output2 = shell_exec($command);
             $arr = explode('**progdata**', $output2);
@@ -108,7 +108,7 @@ class PrediccionhechaController extends Controller
                 $fecha = $fecha / 1000;
                 $fecha = date('Y-m-d', $fecha);
                 $tempData[$fecha]=$valor;
-            }*/
+            }
 
             $command="python3 Forecast_Weather_Data_13nov_Params_Pre.py $idesta et 250 $ini $fin";
            // echo $command;
@@ -132,7 +132,7 @@ class PrediccionhechaController extends Controller
 
                 $model->etp=$valor;
                 $model->rain=$rainData[$fecha];
-               // $model->temp_out=$tempData[$fecha];
+                $model->temp_out=$tempData[$fecha];
 
                 $model->fecha_estimada_inicial=$ini;
                 $model->fecha_estimada_final=$fin;

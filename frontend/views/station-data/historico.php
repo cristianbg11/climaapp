@@ -33,15 +33,15 @@ $this->registerJs($search);
     <div class="search-form" style="display:none">
         <?= $this->render('_search', ['model' => $searchModel]); ?>
     </div>
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['method'=>'get']); ?>
 
     <?= $form->errorSummary($model); ?>
 
     <?php
     $arr = [
         'temp_out' => $model->getAttributeLabel('temp_out'),
-        'rain_rate_in' => $model->getAttributeLabel('rain_rate_in'),
-        'et' => $model->getAttributeLabel('et'),
+        'rain_rate_in' => $model->getAttributeLabel('rainfall_mm'),
+        'et' => $model->getAttributeLabel('et_day'),
     ];
     ?>
     <div class="row mb-1">
@@ -106,8 +106,9 @@ $this->registerJs($search);
             //['class' => 'yii\grid\SerialColumn'],
             //['attribute' => 'id', 'visible' => false],
             'station_id',
-                /*     'ts',
+                    // 'ts',
                   'date',
+                  /*
                   'migration',
                   'arch_int',
                   'rev_type',
@@ -223,7 +224,7 @@ $this->registerJs($search);
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => $gridColumn,
-            //  'pjax' => true,
+            // 'pjax' => true,
             //  'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-station-data']],
             'panel' => [
                 'type' => GridView::TYPE_PRIMARY,
